@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="./../../templates/Trophies-Online-Offline-Templates/allTemplate.css">
+<link rel="stylesheet" href="./../../templates/styles.css">
+<title>Mis Logros - Un Jugador</title>
+</head>
+<body>
+
+    <div class="w-100" id="colorBack1" style="background: #192A56; height: 100%;  box-shadow: 0 0 100px 0px rgba(0,0,0,0.2) inset !important;">
+        <!-- Esta es la textura de fondo -->
+        <div class="textureBig w-100"></div>
+        <!-- Este es el contenedor principal -->
+        <div class="container p-4 d-flex">
+            <div class="w-100 d-flex justify-content-center flex-column align-items-center" style="z-index: 1;">
+                <!-- Aquí está el ícono de la flecha en la parte superior izquierda que sirve para regresar a la vista del las categorías, la de Mis logros para regresar a las opciones de los trofeos y la de una casa para regresar a la vista del main -->
+                <div class="w-100 justify-content-start">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb position-absolute mt-2 mainButton" id="barra" style="border-radius:100px !important; border-width: 3px !important;">
+                            <li class="breadcrumb-item"><a href="./trophiesCategoriesOffline.html" class="hvr-icon-grow-rotate" style="border-width: 4px !important; border-radius: 100px !important;"><i class="fa fa-arrow-left hvr-icon" style="font-size: 1.5em;"></i></a></li>
+                            <li class="breadcrumb-item"><a href="./../trophiesCategories.html" class="hvr-icon-grow-rotate" style="border-width: 4px !important; border-radius: 100px !important;"><i class="fa fa-trophy hvr-icon" style="font-size: 1.5em;"></i> Mis Logros</a></li>
+                            <li class="breadcrumb-item"><a href="./../main.html" class="hvr-icon-grow-rotate" style="border-width: 4px !important; border-radius: 100px !important;"><i class="fa fa-home hvr-icon" style="font-size: 1.5em;"></i> Menú</a></li>
+                        </ol>
+                    </nav>
+                </div>
+                <!-- Este es el título de Educativa -->
+                <div class="mainButton animated pulse infinite ad-3 m-2 p-2 pr-4 pl-4" style="border-width: 4px !important; border-radius: 100px !important;"><h3 class="m-0"><i class="fa fa-book"></i> Educativa</h3></div>
+                <!-- Esta es la fila que divide por dos columnas a todos los trofeos de esta categoría -->
+                <div class="row w-100 mt-5" style="overflow: auto; height: 65vh !important;">
+                    <!-- Esta es la columna izquierda de trofeos -->
+                    <div class="col-md-6">
+                        <div class="row mainButton m-3 p-3" style="border-width: 4px !important; border-radius: 100px !important;">
+                            <!-- Este es el ícono de check que indica que el trofeo ya ha sido alcanzado -->
+                            <div class="d-flex justify-content-end align-items-start position-absolute" style="width: 85%;">
+                                <div class="mainButton text-success d-flex justify-content-center align-items-center pr-2 pl-2 pt-2 pb-2" style="margin-top: -30px; border-width: 3px !important;"><i class="fa fa-check" style="font-size: 1.5em;"></i></div>
+                            </div>
+                            <!-- Estos son los trofeos, cada uno dividido por una imagen en la izquierda, el título y la descripción en la parte derecha -->
+                            <div class="col-md-2 d-flex flex-row justify-content-center align-items-center">
+                                <img src="./../../../assets/trophiesIcons/star.png" class="w-100">
+                            </div>
+                            <div class="col-md-10 d-flex justify-content-center align-items-start flex-column">
+                                <h3 class="m-0">Estrella</h3>
+                                <p class="m-0">Arma una Estrella en el cuadro de figuras</p>
+                            </div>
+                        </div>
+                        <!-- La clase disabledTrophy indica que el trofeo aún no ha sido alcanzado y por ende, tampoco tiene el check -->
+                        <div class="row mainButton m-3 p-3 disabledTrophy" style="border-width: 4px !important; border-radius: 100px !important;">
+                            <div class="col-md-2 d-flex flex-row justify-content-center align-items-center">
+                                <img src="./../../../assets/trophiesIcons/triangle.png" class="w-100">
+                            </div>
+                            <div class="col-md-10 d-flex justify-content-center align-items-start flex-column">
+                                <h3 class="m-0">Triángulo</h3>
+                                <p class="m-0">Arma un Triángulo en el cuadro de figuras</p>
+                            </div>
+                        </div>
+                        <div class="row mainButton m-3 p-3 disabledTrophy" style="border-width: 4px !important; border-radius: 100px !important;">
+                            <div class="col-md-2 d-flex flex-row justify-content-center align-items-center">
+                                <img src="./../../../assets/trophiesIcons/square.png" class="w-100">
+                            </div>
+                            <div class="col-md-10 d-flex justify-content-center align-items-start flex-column">
+                                <h3 class="m-0">Cuadrado</h3>
+                                <p class="m-0">Arma un Cuadrado en el cuadro de figuras</p>
+                            </div>
+                        </div>
+                        <div class="row mainButton m-3 p-3 disabledTrophy" style="border-width: 4px !important; border-radius: 100px !important;">
+                            <div class="col-md-2 d-flex flex-row justify-content-center align-items-center">
+                                <img src="./../../../assets/trophiesIcons/cube.png" class="w-100">
+                            </div>
+                            <div class="col-md-10 d-flex justify-content-center align-items-start flex-column">
+                                <h3 class="m-0">Cubo</h3>
+                                <p class="m-0">Arma un Cubo en el cuadro de figuras</p>
+                            </div>
+                        </div>
+                        <div class="row mainButton m-3 p-3 disabledTrophy" style="border-width: 4px !important; border-radius: 100px !important;">
+                            <div class="col-md-2 d-flex flex-row justify-content-center align-items-center">
+                                <img src="./../../../assets/trophiesIcons/pyramid.png" class="w-100">
+                            </div>
+                            <div class="col-md-10 d-flex justify-content-center align-items-start flex-column">
+                                <h3 class="m-0">Pirámide</h3>
+                                <p class="m-0">Arma una Pirámide en el cuadro de figuras</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Esta es la columna derecha de trofeos -->
+                    <div class="col-md-6">
+                        <div class="row mainButton m-3 p-3 disabledTrophy" style="border-width: 4px !important; border-radius: 100px !important;">
+                            <div class="col-md-2 d-flex flex-row justify-content-center align-items-center">
+                                <div class="mainButton text-success d-flex justify-content-center align-items-center p-1">
+                                    <img src="./../../../assets/trophiesIcons/one.png" class="w-100">
+                                </div>
+                            </div>
+                            <div class="col-md-10 d-flex justify-content-center align-items-start flex-column">
+                                <h3 class="m-0">Primero más rápido</h3>
+                                <p class="m-0">Completa el nivel 1 en menos de 1:30</p>
+                            </div>
+                        </div>
+                        <div class="row mainButton m-3 p-3 disabledTrophy" style="border-width: 4px !important; border-radius: 100px !important;">
+                            <div class="col-md-2 d-flex flex-row justify-content-center align-items-center">
+                                <div class="mainButton text-success d-flex justify-content-center align-items-center p-1">
+                                    <img src="./../../../assets/trophiesIcons/two.png" class="w-100">
+                                </div>
+                            </div>
+                            <div class="col-md-10 d-flex justify-content-center align-items-start flex-column">
+                                <h3 class="m-0">Sin Segundos</h3>
+                                <p class="m-0">Completa el nivel 2 en menos de 2:30</p>
+                            </div>
+                        </div>
+                        <div class="row mainButton m-3 p-3 disabledTrophy" style="border-width: 4px !important; border-radius: 100px !important;">
+                            <div class="col-md-2 d-flex flex-row justify-content-center align-items-center">
+                                <div class="mainButton text-success d-flex justify-content-center align-items-center p-1">
+                                    <img src="./../../../assets/trophiesIcons/three.png" class="w-100">
+                                </div>
+                            </div>
+                            <div class="col-md-10 d-flex justify-content-center align-items-start flex-column">
+                                <h3 class="m-0">Inexorable</h3>
+                                <p class="m-0">Completa el nivel 3 en menos de 4:30</p>
+                            </div>
+                        </div>
+                        <div class="row mainButton m-3 p-3 disabledTrophy" style="border-width: 4px !important; border-radius: 100px !important;">
+                            <div class="col-md-2 d-flex flex-row justify-content-center align-items-center">
+                                <div class="mainButton text-success d-flex justify-content-center align-items-center p-1">
+                                    <img src="./../../../assets/trophiesIcons/four.png" class="w-100">
+                                </div>
+                            </div>
+                            <div class="col-md-10 d-flex justify-content-center align-items-start flex-column">
+                                <h3 class="m-0">Imposible</h3>
+                                <p class="m-0">Completa el nivel 4 en menos de 5:00</p>
+                            </div>
+                        </div>
+                        <div class="row mainButton m-3 p-3 disabledTrophy" style="border-width: 4px !important; border-radius: 100px !important;">
+                            <div class="col-md-2 d-flex flex-row justify-content-center align-items-center">
+                                <div class="mainButton text-success d-flex justify-content-center align-items-center p-1">
+                                    <img src="./../../../assets/trophiesIcons/five.png" class="w-100">
+                                </div>
+                            </div>
+                            <div class="col-md-10 d-flex justify-content-center align-items-start flex-column">
+                                <h3 class="m-0">Inmortal</h3>
+                                <p class="m-0">Completa el nivel 5 en menos de 5:30</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- ---------No tocar esto:--------------------- -->
+
+     <div class="d-flex justify-content-end align-items-start position-fixed" style="width: 42%;" id="OnlineLevel2">
+                                
+    </div>
+
+    <!-- --------------------------------- -->
+
+<script src="../../templates/Trophies-Online-Offline-Templates/allTemplate.js"></script>
+<script src="./../../controllers/trophiesOfflineController/trophiesEducativeOfflineController.js"></script>
+</body>
+</html>

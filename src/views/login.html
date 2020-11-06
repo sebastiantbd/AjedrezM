@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- aquí llamamos los estilos de allTemplate.css donde están todos
+los recursos gráficos para que la apliación se vea bonita, es decir,
+es una plantilla principal que necesitan todas las vistas de la apliación para que se vea muy bien -->
+    <link rel="stylesheet" href="./../templates/allTemplate.css">
+    <!-- Aquí se encuentran los estilos personalizados que nosotros mismos creemos para la parte estética de la aplicación -->
+    <link rel="stylesheet" href="./../templates/styles.css">
+    <title>AjedrezM</title>
+</head>
+
+<body>
+
+    <div class="row w-100 m-0" style="height: 100%;">
+        <!-- contenedor donde está la imagen del caballo -->
+        <div class="col-md-4 p-0" style="height: 100%;">
+            <!-- sombra -->
+            <div class="bgBlackShadow"></div>
+            <div class="mainBack w-100" style="height: 100%;"></div>
+        </div>
+        <!-- contenedor donde está todo el formulario -->
+        <div class="col-md-8 p-0" style="background: #192A56; box-shadow: 0 0 100px 0px rgba(0,0,0,0.2) inset !important;">
+            <!-- textura de figuras geometricas de fondo -->
+            <div class="texture w-100"></div>
+            <!-- sección donde está el botón de "acerca de", para ver la información de la aplicación -->
+            <div class="about w-100">
+                <div class="w-100 text-center p-2" style="position: absolute; background: #FFEDCE;">
+                    <button class="btn mainButton hvr-float hvr-icon-grow-rotate" data-toggle="modal" data-target="#acerca" style="font-weight: 500;" data-step="7" data-intro="
+              <div class='w-100 d-flex justify-content-center align-items-center flex-column'>
+                <i class='fa fa-file-text animated bounceIn' style='font-size:9em'></i>
+                <p class='m-0 text-center'><strong>¿Quieres saber acerca de nosotros?</strong><br>Presiona aquí para ver nuestra información</p>
+              </div>
+              "><i class="fa fa-file-text hvr-icon"></i> Acerca de</button>
+                </div>
+            </div>
+            <div class="container p-4 d-flex">
+                <div class="w-100 d-flex justify-content-center flex-column align-items-center" style="z-index: 1;">
+
+                    <!-- botón del ícono de ayuda para la guía paso a paso del login -->
+                    <div class="w-100">
+                        <div class="position-absolute mr-3" style="right: 0;">
+                            <button class="mainButton pr-2 pl-2 animated bounceIn d-flex align-items-center flex-row" onclick="introJs().start();" id="helpTutorial">
+                    <i class="fa fa-question-circle" style="font-size: 2.5em;"></i>
+                    <strong class="m-0 ml-2" id="helpText" style="display:none;">¿Necesitas Ayuda?</strong>
+                  </button>
+                        </div>
+                    </div>
+
+                    <!-- logo rotatorio del proyecto -->
+                    <div class="w-25 mt-4 d-flex justify-content-center animated bounce infinite ad-3" id="moveIcon">
+                        <div class="icon d-flex justify-content-center align-items-center" style="border-color: rgb(57, 91, 179) !important;">
+                            <img src="./../../assets/Logo-Remasterizado2.png" style="width: 90%;">
+                        </div>
+                    </div>
+                    <div class="w-75 mt-4">
+                        <!-- formulario de login -->
+                        <form>
+                            <!-- campo de nombre de usuario o Correo -->
+                            <div class="form-group" data-step="1" data-intro="
+                  <div class='w-100 d-flex justify-content-center align-items-center flex-column'>
+                    <i class='fa fa-user animated bounceIn' style='font-size:9em'></i>
+                    <p class='m-0'>Escribe con el teclado tu nombre de Usuario</p>
+                  </div>
+                ">
+                                <label for="user">Nombre de Usuario o Correo:</label>
+                                <input type="text" class="form-control" id="user" aria-describedby="emailHelp" placeholder="Nombre de Usuario">
+                            </div>
+                            <!-- campo de contraseña -->
+                            <div class="form-group" data-step="2" data-intro="
+                  <div class='w-100 d-flex justify-content-center align-items-center flex-column'>
+                    <i class='fa fa-lock animated bounceIn' style='font-size:9em'></i>
+                    <p class='m-0'>Escribe con el teclado tu Contraseña</p>
+                  </div>
+                  ">
+                                <label for="password">Contraseña:</label>
+                                <input type="password" class="form-control" id="password" placeholder="Contraseña">
+                            </div>
+                            <div class="row mt-4">
+                                <!-- botón de iniciar sesión -->
+                                <div class="col-md-6"><button type="submit" class="btn mainButton btn-block hvr-float hvr-icon-grow-rotate text-success" data-step="3" data-intro="
+                    <div class='w-100 d-flex justify-content-center align-items-center flex-column'>
+                        <i class='fa fa-hand-o-up animated bounceIn' style='font-size:9em'></i>
+                      <p class='m-0'>Presiona aquí para Iniciar Sesión</p>
+                    </div>
+                    "><i class="fa fa-arrow-circle-right hvr-icon"></i> Iniciar Sesión</button></div>
+                                <!-- botón para ir a registro -->
+                                <div class="col-md-6"><a href="./register.html" class="btn btn-block hvr-float hvr-icon-grow-rotate a-fully" style="color: #f75b00;" data-step="4" data-intro="
+                    <div class='w-100 d-flex justify-content-center align-items-center flex-column'>
+                      <i class='fa fa-user-plus animated bounceIn' style='font-size:9em'></i>
+                      <p class='m-0 text-center'><strong>¿Eres Nuevo?...</strong><br>Presiona aquí para Registrarte</p>
+                    </div>
+                    "><i class="fa fa-sign-in hvr-icon"></i> Registrarme</a></div>
+                            </div>
+                        </form>
+                        <hr style="border: 1px solid white;">
+                        <div class="row">
+                            <!-- botón para jugar como Invitado -->
+                            <div class="col-md-6"><a href="./test.html" class="btn btn-block hvr-float hvr-icon-grow-rotate a-fully" data-step="5" data-intro="
+                  <div class='w-100 d-flex justify-content-center align-items-center flex-column'>
+                    <i class='fa fa-arrow-circle-o-right animated bounceIn' style='font-size:9em'></i>
+                    <p class='m-0 text-center'><strong>¿Deseas jugar sin una cuenta?</strong><br>Presiona aquí para acceder como invitado</p>
+                  </div>
+                  "><i class="fa fa-user hvr-icon"></i> Jugar como Invitado</a></div>
+                            <!-- botón para ir a "Olvidé mi Contraseña" -->
+                            <div class="col-md-6"><a href="./mailPassword.html" class="btn btn-block hvr-float hvr-icon-grow-rotate a-fully" data-step="6" data-intro="
+                  <div class='w-100 d-flex justify-content-center align-items-center flex-column'>
+                    <i class='fa fa-question-circle-o animated bounceIn' style='font-size:9em'></i>
+                    <p class='m-0 text-center'><strong>¿Olvidaste tu Contraseña?</strong><br>Presiona aquí para cambiarla</p>
+                  </div>
+                  "><i class="fa fa-question-circle hvr-icon"></i> Olvidé mi Contraseña</a></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal que se muestra al presionar el botón "acerca de" donde está la información de la aplicación -->
+        <div class="modal fade" id="acerca" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- título -->
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Acerca de</h5>
+                        <!-- boton para cerrar el modal -->
+                        <button style="border: 0 !important;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- contenido del Modal -->
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <!-- botón para cerrar el modal -->
+                        <button type="button" class="btn mainButton hvr-float" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- aquí llamamos el script de allTemplate.js donde están todos
+los recursos funcionales para que la apliación funcione, es decir,
+es una plantilla principal que necesitan todas las vistas de la apliación para que funcione -->
+    <script src="./../templates/allTemplate.js"></script>
+    <!-- aquí llamamos al controlador de esta vista donde sólo se encuentran los recursos necesarios para que explícita e implícitamente funcione la vista del login (cada vista tiene un controlador único) -->
+    <script src="./../controllers/loginController.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="./../templates/allTemplate.css">
+<link rel="stylesheet" href="./../templates/styles.css">
+<title>Instrucciones</title>
+</head>
+<body>
+
+    <div class="w-100" id="colorBack1" style="background: #192A56; height: 100%;  box-shadow: 0 0 100px 0px rgba(0,0,0,0.2) inset !important;">
+        <!-- Esta es la textura de las figuras geométricas que está de fondo -->
+        <div class="textureBig w-100"></div>
+    <!-- Este es el contenedor principal -->
+        <div class="container p-4 d-flex">
+            <div class="w-100 d-flex justify-content-center flex-column align-items-center" style="z-index: 1;">
+                <!-- Aquí está el ícono de la felcha en la parte superior izquierda que sirve para regresar a la vista del main -->
+                <div class="w-100 justify-content-start">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb position-absolute mt-2 mainButton" id="barra" style="border-radius:100px !important; border-width: 3px !important;">
+                            <li class="breadcrumb-item"><a href="./main.html" class="hvr-icon-grow-rotate" style="border-width: 4px !important; border-radius: 100px !important;"><i class="fa fa-arrow-left hvr-icon" style="font-size: 1.5em;"></i></a></li>
+                        </ol>
+                    </nav>
+                </div>
+                <!-- Este es el título de Instrucciones -->
+                <div class="mainButton animated pulse infinite ad-3 m-2 p-2 pr-4 pl-4" style="border-width: 4px !important; border-radius: 100px !important;"><h3 class="m-0"><i class="fa fa-info-circle"></i> Instrucciones</h3></div>
+                <div class="w-100 mt-5">
+                    <!-- Este es el contenedor donde están las instrucciones, gracias a la clase scroll-none no se verá el scroll en ningún momento -->
+                    <div class="mainButton p-4 scroll-none" style="border-radius:50px !important; border-width:5px !important; overflow: auto; height: 470px;">
+                        <!-- Aquí está la información dividida una por una, por una imagen y texto -->
+                        <div class="row mr-0 ml-0 mb-4 w-100 d-flex align-items-center">
+                            <div class="col-md-3"><img src="./../../assets/offline.jpg" class="card-img"></div>
+                            <div class="col-md-9">
+                                <h2>Primero que todo...</h2>
+                                <p class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil necessitatibus maiores ipsum. Rem repudiandae debitis accusantium non sed iusto reiciendis ab deleniti molestiae voluptatum quibusdam quam maxime illum, dolores vero.</p>
+                            </div>
+                        </div>
+                        <div class="row mr-0 ml-0 mb-4 w-100 d-flex align-items-center">
+                            <div class="col-md-9">
+                                <h2>Modo Educativo</h2>
+                                <p class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil necessitatibus maiores ipsum. Rem repudiandae debitis accusantium non sed iusto reiciendis ab deleniti molestiae voluptatum quibusdam quam maxime illum, dolores vero.</p>
+                            </div>
+                            <div class="col-md-3"><img src="./../../assets/learnMode2.jpg" class="card-img"></div>
+                        </div>
+                        <div class="row mr-0 ml-0 mb-4 w-100 d-flex align-items-center">
+                            <div class="col-md-3"><img src="./../../assets/creativeMode.jpg" class="card-img"></div>
+                            <div class="col-md-9">
+                                <h2>Modo Creativo</h2>
+                                <p class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil necessitatibus maiores ipsum. Rem repudiandae debitis accusantium non sed iusto reiciendis ab deleniti molestiae voluptatum quibusdam quam maxime illum, dolores vero.</p>
+                            </div>
+                        </div>
+                        <div class="row mr-0 ml-0 mb-4 w-100 d-flex align-items-center">
+                            <div class="col-md-9">
+                                <h2>Modo Experto</h2>
+                                <p class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil necessitatibus maiores ipsum. Rem repudiandae debitis accusantium non sed iusto reiciendis ab deleniti molestiae voluptatum quibusdam quam maxime illum, dolores vero.</p>
+                            </div>
+                            <div class="col-md-3"><img src="./../../assets/expertMode.jpg" class="card-img"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="./../templates/allTemplate.js"></script>
+<script src="./../controllers/instructionsController.js"></script>
+</body>
+</html>

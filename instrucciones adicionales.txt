@@ -1,0 +1,37 @@
+﻿terminal (powershell)
+
+npm start: inicializar la aplicación.
+npm i (librería - dependencia - etc.): instalar dependencias, librerías, etc.
+npm i -D (librería - dependencia - etc.): instalar dependencias de desarrollo, librerías de desarrollo, etc.
+npm i: instalar todas las dependecias normales y de desarrollo por defecto de la aplicación.
+npm uninstall (librería - dependencia - etc.): desinstalar dependencias, librerías, etc.
+npm run postinstall: instalar todas las dependencias de electron por defecto para su compilación.
+npm run dist: compilar toda la aplicación en modo producción(generar .exe)
+
+proyecto
+
+En todas las vistas que terminan en "Game" hay que reemplazar donde están los tableros de ajedrez por este código:
+<!-- Aquí esta el tablero superior -->
+                             	<div class="chessBox position-relative p-2" id="tablero1" style="overflow: hidden;">
+                                    <div class="tableShadow" id="shadowTab1"></div>
+                                </div>
+
+                                <!-- Aquí esta el tablero inferior -->
+                                <div class="chessBox position-relative p-2" id="tablero2" style="overflow: hidden;">
+                                    <div class="tableShadow" id="shadowTab2"></div>
+                                </div>
+
+e importar el script de generarTablero1.js y generarTablero2.js en el HTML
+
+-------------------GIT-------------------------
+
+terminal (powershell)
+
+git add . : sirve para añadir todos los cambios realizados en la aplicación
+git status : sirve para ver los archivos que fueron modificados en la aplicación
+git commit -m "(descripción del cambio)" : sirve para añadir todos los cam ios y añadir la descripción en el repositorio
+git push: sirve para actualizar todo el repositorio local y virtual de Git
+
+Nota: copiar todos estos códigos en este mismo orden uno a la vez, cada vez que vayan a modificar la aplicación
+
+git pull: sirve para actualizar tu repositorio local (se realiza cuando otro integrante del proyecto realiza cambios en la aplicación y tu necesitas actualizarlos)

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="./../templates/allTemplate.css">
+<link rel="stylesheet" href="./../templates/styles.css">
+<title>Registro</title>
+</head>
+<body>
+
+    <div class="row w-100 m-0" style="height: 100%;">
+
+        <!-- Este es el cuadro de información de datos que se muestra al presionar siguiente luego de llenar todos los campos del formulario -->
+        <div class="position-absolute w-100" style="height: 100%;" id="registerCont">
+          <div class="bgBlackShadow" style="z-index: 2; display:none;" id="registerShadow"></div>
+          <div class="position-absolute w-100" style="z-index: 2; display: none; height: 100% !important" id="registerBurble">
+              <div class="d-flex justify-content-center align-items-center w-100" style="height: 100%;">
+                  <div class="w-75 container mainButton p-3 d-flex justify-content-center align-items-center flex-column" style="border-radius:50px !important; border-width:5px !important;">
+                          
+                      <div class="levelsBack mainButton p-3 m-2 d-flex justify-content-center align-items-center" style="border-radius:100px !important; border-width:5px !important">
+                          <h4 class="m-0 mr-2"><i class="fa fa-file-text" style="color: #68472F;"></i> Datos</h4>
+                      </div>
+
+                      <div class="w-100 p-5">
+                          <ul class="font-size: 1.5em">
+                              <li><h4><strong>Nombre Completo:</strong> <span id="nameInfo"></span></h4></li>
+                              <li><h4><strong>Nombre de Usuario:</strong> <span id="userInfo"></span></h4></li>
+                              <li><h4><strong>Email:</strong> <span id="emailInfo"></span></h4></li>
+                              <li><h4><strong>Sexo:</strong> <span id="sexInfo"></span></h4></li>
+                              <li><h4><strong>Discapacidad:</strong> <span id="disInfo"></span></h4></li>
+                          </ul>
+                      </div>
+
+                      <h3 class="text-center m-0 mb-2"><strong>¿Tus datos están correctos?</strong></h3>
+
+                      <div class="w-100 d-flex justify-content-center mb-2"><button class="text-danger levelsBack mainButton p-2 d-flex justify-content-center align-items-center w-50 hvr-wobble-horizontal" style="border-radius:100px !important; border-width:5px !important; font-size: 1.5em; color: var(--success) !important;" onclick="registerModalQuit()" data-target="#registerCarousel" data-slide-to="1" id="testStart"><i class="fa fa-check hvr-icon mr-2"></i>Sí, Continuar</button></div>
+                      <div class="w-100 d-flex justify-content-center mb-4"><button class="text-danger levelsBack mainButton p-2 d-flex justify-content-center align-items-center w-50 hvr-wobble-horizontal" style="border-radius:100px !important; border-width:5px !important; font-size: 1.5em; color: var(--danger) !important;" onclick="registerModalQuit()"><i class="fa fa-close hvr-icon mr-2"></i>No, Cerrar</button></div>
+                          
+                  </div>
+              </div>
+          </div>
+      </div>      
+
+      <!-- test -->
+
+      <!-- Aquí se muestra el cuadro de instrucciones del primer test -->
+        <div class="position-absolute w-100" style="height: 100%;" id="test1Cont">
+            <div class="bgBlackShadow" style="z-index: 2; display:none;" id="test1Shadow"></div>
+            <div class="position-absolute w-100" style="z-index: 2; display: none; height: 100% !important" id="test1Burble">
+                <div class="d-flex justify-content-center align-items-center w-100" style="height: 100%;">
+                    <div class="w-75 container mainButton p-3 d-flex justify-content-center align-items-center flex-column" style="border-radius:50px !important; border-width:5px !important;">
+                            
+                        <div class="levelsBack mainButton p-3 m-2 d-flex justify-content-center align-items-center" style="border-radius:100px !important; border-width:5px !important">
+                            <h4 class="m-0 mr-2"><i class="fa fa-eye" style="color: var(--info);"></i> Memoria</h4>
+                        </div>
+
+                        <div class="w-100 p-5">
+                            <h5><i class="fa fa-file-text"></i> Instrucciones:</p>
+                            <ul>
+                                <li>Presiona el botón <span class="text-success"><i class="fa fa-play"></i> Comenzar</span> para iniciar el Test</li>
+                                <li>En los 2 cuadros (<i class="fa fa-square"></i>), aparecerán íconos de forma aleatoria durante 5 segundos</li>
+                                <li>Lo que debes hacer es memorizar la posición de los íconos en los cuadros, y cuando desaparezcan, debes arrastrar con el cursor los íconos que se muestran en la parte superior hasta los diferentes cuadros</li>
+                                <li>Pon mucha atención, porque si colocas un ícono en un cuadro equivocado <strong class="text-danger">perderás</strong> e inmediatamente pasarás a <strong>AjedrezM Diferencial</strong></li>
+                                <li>Este <strong>Test</strong> tiene <strong>2</strong> rondas, para continuar con el siguiente <strong>Test</strong> deberás completar las <strong>2</strong> rondas!</li>
+                            </ul>
+                            <h3 class="text-center m-0"><strong>Te deseo mucha suerte!</strong></h3>
+                        </div>
+
+                        <div class="w-100 d-flex justify-content-center mb-4"><button class="start text-danger levelsBack mainButton p-2 d-flex justify-content-center align-items-center w-50 hvr-wobble-horizontal" style="border-radius:100px !important; border-width:5px !important; font-size: 1.5em; color: var(--danger) !important;" onclick="test1ModalQuit()"><i class="fa fa-close hvr-icon mr-2"></i> Cerrar</button></div>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      <!-- Aquí se muestra el cuadro de instrucciones del segundo test -->
+        <div class="position-absolute w-100" style="height: 100%;" id="test2Cont">
+            <div class="bgBlackShadow" style="z-index: 2; display:none;" id="test2Shadow"></div>
+            <div class="position-absolute w-100" style="z-index: 2; display: none; height: 100% !important" id="test2Burble">
+                <div class="d-flex justify-content-center align-items-center w-100" style="height: 100%;">
+                    <div class="w-75 container mainButton p-3 d-flex justify-content-center align-items-center flex-column" style="border-radius:50px !important; border-width:5px !important;">
+                            
+                            <div class="levelsBack mainButton p-3 m-2 d-flex justify-content-center align-items-center" style="border-radius:100px !important; border-width:5px !important">
+                                <h4 class="m-0 mr-2"><i class="fa fa-eye" style="color: var(--purple);"></i> Memoria 2</h4>
+                            </div>
+
+                            <div class="w-100 p-5">
+                                <h5><i class="fa fa-file-text"></i> Instrucciones:</p>
+                                <ul>
+                                    <li>Presiona el botón <span class="text-success"><i class="fa fa-play"></i> Comenzar</span> para iniciar el Test</li>
+                                    <li>En los 3 cuadros (<i class="fa fa-square"></i>), aparecerán íconos de forma aleatoria durante 5 segundos</li>
+                                    <li>Lo que debes hacer es memorizar la posición de los íconos en los cuadros, y cuando desaparezcan, debes arrastrar con el cursor los íconos que se muestran en la parte superior hasta los diferentes cuadros</li>
+                                    <li>Pon mucha atención, porque si colocas un ícono en un cuadro equivocado sumará <strong class="text-danger">1 error</strong> y al completar <strong class="text-danger">3</strong> pasarás inmediatamente a <strong>AjedrezM Diferencial</strong></li>
+                                    <li>Este <strong>Test</strong> tiene <strong>2</strong> rondas, para continuar con el siguiente <strong>Test</strong> deberás completar las <strong>2</strong> rondas!</li>
+                                </ul>
+                                <h3 class="text-center m-0"><strong>Te deseo mucha suerte!</strong></h3>
+                            </div>
+
+                        <div class="w-100 d-flex justify-content-center mb-4"><button class="start text-danger levelsBack mainButton p-2 d-flex justify-content-center align-items-center w-50 hvr-wobble-horizontal" style="border-radius:100px !important; border-width:5px !important; font-size: 1.5em; color: var(--danger) !important;" onclick="test2ModalQuit()"><i class="fa fa-close hvr-icon mr-2"></i> Cerrar</button></div>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      <!-- Aquí se muestra el cuadro de instrucciones del tercer test -->
+        <div class="position-absolute w-100" style="height: 100%;" id="test3Cont">
+            <div class="bgBlackShadow" style="z-index: 2; display:none;" id="test3Shadow"></div>
+            <div class="position-absolute w-100" style="z-index: 2; display: none; height: 100% !important" id="test3Burble">
+                <div class="d-flex justify-content-center align-items-center w-100" style="height: 100%;">
+                    <div class="w-75 container mainButton p-3 d-flex justify-content-center align-items-center flex-column" style="border-radius:50px !important; border-width:5px !important;">
+                            
+                            <div class="levelsBack mainButton p-3 m-2 d-flex justify-content-center align-items-center" style="border-radius:100px !important; border-width:5px !important">
+                                <h4 class="m-0 mr-2"><i class="fa fa-eye" style="color: var(--danger);"></i> Memoria 3</h4>
+                            </div>
+
+                            <div class="w-100 p-5">
+                                <h5><i class="fa fa-file-text"></i> Instrucciones:</p>
+                                <ul>
+                                    <li>Presiona el botón <span class="text-success"><i class="fa fa-play"></i> Comenzar</span> para iniciar el Test</li>
+                                    <li>En los 4 cuadros (<i class="fa fa-square"></i>), aparecerán íconos de forma aleatoria durante 5 segundos</li>
+                                    <li>Lo que debes hacer es memorizar la posición de los íconos en los cuadros, y cuando desaparezcan, debes arrastrar con el cursor los íconos que se muestran en la parte superior hasta los diferentes cuadros</li>
+                                    <li><strong>No te Preocupes!</strong>, este Test es <strong class="text-info">Opcional</strong>, si <strong class="text-danger">Pierdes</strong> podrás tener la oportunidad de reiniciar este <strong>Test</strong></li>
+                                    <li>El Objetivo aquí es medir todas tus capacidades y habilidades para la memoria</li>
+                                    <li>Este <strong>Test</strong> tiene <strong>2</strong> rondas, si quieres avanzar al último Test sin terminar este, presiona el botón <strong class="text-success"><i class="fa fa-arrow-circle-right"></i> Siguiente Test</strong></li>
+                                </ul>
+                                <h3 class="text-center m-0"><strong>Te deseo mucha suerte!</strong></h3>
+                            </div>
+
+                        <div class="w-100 d-flex justify-content-center mb-4"><button class="start text-danger levelsBack mainButton p-2 d-flex justify-content-center align-items-center w-50 hvr-wobble-horizontal" style="border-radius:100px !important; border-width:5px !important; font-size: 1.5em; color: var(--danger) !important;" onclick="test3ModalQuit()"><i class="fa fa-close hvr-icon mr-2"></i> Cerrar</button></div>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      <!-- Aquí se muestra el cuadro de instrucciones del cuarto test -->
+        <div class="position-absolute w-100" style="height: 100%;" id="test4Cont">
+            <div class="bgBlackShadow" style="z-index: 2; display:none;" id="test4Shadow"></div>
+            <div class="position-absolute w-100" style="z-index: 2; display: none; height: 100% !important" id="test4Burble">
+                <div class="d-flex justify-content-center align-items-center w-100" style="height: 100%;">
+                    <div class="w-75 container mainButton p-3 d-flex justify-content-center align-items-center flex-column" style="border-radius:50px !important; border-width:5px !important;">
+                            
+                        <div class="levelsBack mainButton p-3 m-2 d-flex justify-content-center align-items-center" style="border-radius:100px !important; border-width:5px !important">
+                            <h4 class="m-0 mr-2"><i class="fa fa-refresh" style="color: #68472F;"></i> Secuencia</h4>
+                        </div>
+
+                        <div class="w-100 p-5">
+                            <h5><i class="fa fa-file-text"></i> Instrucciones:</p>
+                            <ul>
+                                <li>Presiona el botón <span class="text-success"><i class="fa fa-play"></i> Comenzar</span> para iniciar el Test</li>
+                                <li>Aparecerá un círculo dividido en cuatro colores (<span class="text-success">Verde</span>, <span class="text-danger">Rojo</span>, <span class="text-warning">Amarillo</span>, <span class="text-info">Azul</span>)</li>
+                                <li>Los diferentes colores se iluminarán en secuencia de forma aleatoria durante 1 segundo cada uno</li>
+                                <li>Lo que debes hacer es memorizar la secuencia de los colores, y repetirla exactamente igual 5 veces seguidas</li>
+                                <li>Pon mucha atención, porque si presionas un color que no va en la secuencia, inmediatamente <strong class="text-danger">Perderás</strong> y deberás comenzar de nuevo este <strong>Test</strong></li>
+                                <li>Tienes <strong>2</strong> intentos, para completar este <strong>Test</strong>, de lo conrario terminará y pasarás inmediatamente a <strong>AjedrezM Diferencial!</strong></li>
+                                <li>Este <strong>Test</strong> tiene <strong>2</strong> Niveles, para completar y finalizar todo el <strong>Test</strong>, debes completar <strong>ambos</strong> Niveles!</li>
+                            </ul>
+                            <h3 class="text-center m-0"><strong>Te deseo mucha suerte!</strong></h3>
+                        </div>
+
+                        <div class="w-100 d-flex justify-content-center mb-4"><button class="start text-danger levelsBack mainButton p-2 d-flex justify-content-center align-items-center w-50 hvr-wobble-horizontal" style="border-radius:100px !important; border-width:5px !important; font-size: 1.5em; color: var(--danger) !important;" onclick="test4ModalQuit()"><i class="fa fa-close hvr-icon mr-2"></i> Cerrar</button></div>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Aquí se muestra el cuadro de estadísticas final donde se determina si el jugador va a AjedrezM Normal o AjedrezM Diferencial -->
+        <div class="position-absolute w-100" style="height: 100%;" id="checkTestCont">
+            <div class="bgBlackShadow" style="z-index: 2; display:none;" id="checkTestShadow"></div>
+            <div class="position-absolute w-100" style="z-index: 2; display: none; height: 100% !important" id="checkTestBurble">
+                <div class="d-flex justify-content-center align-items-center w-100" style="height: 100%;">
+                    <div class="w-75 container mainButton p-3 d-flex justify-content-center align-items-center flex-column" style="border-radius:50px !important; border-width:5px !important;">
+                            
+                        <div class="levelsBack mainButton p-3 m-2 d-flex justify-content-center align-items-center" style="border-radius:100px !important; border-width:5px !important">
+                            <h4 class="m-0 mr-2"><i class="fa fa-list" style="color: #68472F;"></i> Estadísticas</h4>
+                        </div>
+
+                        <div class="w-100 p-5">
+                            <ul>
+                                <li><h3 class="m-0" style="color: var(--purple);"><i class="fa fa-clock-o"></i> Tiempo total: <strong id="totalTime">00:00</strong></h3></li>
+                                <li><h3 class="m-0 text-danger"><i class="fa fa-close"></i> Errores Cometidos: <strong id="totalErrors">0</strong></h3></li>
+                                <li><h3 class="m-0 text-info"><i class="fa fa-refresh"></i> Intentos Realizados: <strong id="totalAttemps">0</strong></h3></li>
+                                <li><h3 class="m-0 text-success"><i class="fa fa-check"></i> Tests Completados: <strong id="totalTests">0</strong> <span id="starTests"></span></h3></li>
+                            </ul>
+                            <h3 class="text-center"><strong>¡Bienvenido a AjedrezM <span class="text-warning" id="personType">Normal</span>!</strong></h3>
+                        </div>
+
+                        <div class="w-100 d-flex justify-content-center mb-4"><button class="text-danger levelsBack mainButton p-2 d-flex justify-content-center align-items-center w-50 hvr-wobble-horizontal" style="border-radius:100px !important; border-width:5px !important; font-size: 1.5em; color: var(--success) !important;" onclick="location.href = './../views/login.html'"><i class="fa fa-sign-out hvr-icon mr-2"></i> Finalizar</button></div>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- test -->
+
+      <!-- contenedor donde está la imagen del caballo -->
+      <div class="col-md-4 p-0" style="height: 100%;" id="horseImgLeft">
+        <div class="bgBlackShadow"></div>
+        <div class="mainBack w-100" style="height: 100%;"></div>
+      </div>
+      <!-- contenedor donde está todo el formulario -->
+      <div class="col-md-8 p-0" style="background: #192A56; box-shadow: 0 0 100px 0px rgba(0,0,0,0.2) inset !important;" id="mainContRight">
+        <!-- textura de figuras geometricas de fondo -->
+          <div class="textureBig w-100"></div>
+          <!-- sección donde está el botón de "acerca de", para ver la información de la aplicación -->
+          <div class="about w-100" id="about">
+            <div class="w-100 text-center p-2" style="position: absolute; background: #FFEDCE;">
+                <button class="btn mainButton hvr-float hvr-icon-grow-rotate" data-toggle="modal" data-target="#acerca" style="font-weight: 500;"><i class="fa fa-file-text hvr-icon"></i> Acerca de</button>              
+            </div>
+          </div>
+          <div class="container p-4 d-flex">
+            <div class="w-100 d-flex justify-content-center flex-column align-items-center" style="z-index: 1;">
+
+                <!-- Aquí inicia el carrusel donde está el formulario y el test -->
+              <div id="registerCarousel" class="carousel slide w-75" data-ride="carousel" data-interval="false">
+
+                <div class="carousel-inner" style="overflow: inherit;">
+                  <div class="carousel-item active">
+                    <div class="w-100 mt-2">
+                        <!-- formulario de Registro -->
+                      <form>
+                          <div class="form-group d-flex justify-content-center">
+                              <label for="img"  class="icon d-flex justify-content-center align-items-center" id="imgContent" style="cursor: pointer;">
+                                  <div class="bgBlackShadowIco justify-content-center text-center">
+                                      <p class="text-white mb-0 text-ico" style="transition: 0.3s ease-in-out;">Elegir Imagen</p>
+                                  </div>
+                                  <img src="./../../assets/user.png" id="imgBack" style="height: 100%">
+                              </label>
+                              <input type="file" name="img" id="img" style="visibility: hidden; position: absolute;">
+                          </div>
+                          <div class="w-100">
+                            <div class="form-group">
+                              <label for="user">Nombre Completo: *</label>
+                              <input type="text" class="form-control" id="allName"  placeholder="Nombre Completo">
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="user">Nombre de Usuario: *</label>
+                                <input type="text" class="form-control" id="user"  placeholder="Nombre de Usuario">
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="email">Email: *</label>
+                                <input type="email" class="form-control" id="email" placeholder="Email">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="password">Contraseña: *</label>
+                                <input type="password" class="form-control" id="password" placeholder="Contraseña">
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="password2">Repita la Contraseña: *</label>
+                                <input type="password" class="form-control" id="password2" placeholder="Repita la Contraseña">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="genero">Sexo: *</label>
+                                <select class="form-control" id="genero">
+                                  <option value="-1">Seleccione...</option>
+                                  <option value="man" class="bg-primary text-white">Hombre</option>
+                                  <option value="woman" class="text-white" style="background: orchid;">Mujer</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>¿Tienes alguna discapacidad?: *</label>
+                                <div class="a-fully m-0 p-1 row">
+                                  <div class="custom-control custom-radio col-md-6 d-flex justify-content-center">
+                                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="si">
+                                    <label class="custom-control-label" for="customRadio1">Sí</label>
+                                  </div>
+                                  <div class="custom-control custom-radio col-md-6 d-flex justify-content-center">
+                                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="No">
+                                    <label class="custom-control-label" for="customRadio2">No</label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <hr class="mt-0" style="border: 1px solid white;">
+                          <div class="row">
+                              <div class="col-md-6"><button type="submit" class="btn mainButton btn-block text-success hvr-float hvr-icon-grow-rotate registerPerson" onclick="registerStatsModal()"><i class="fa fa-arrow-circle-right hvr-icon"></i> Siguiente</button></div>
+                              <div class="col-md-6"><a href="./login.html" class="btn btn-block hvr-float hvr-icon-grow-rotate text-danger a-fully"><i class="fa fa-close hvr-icon"></i> Cancelar</a></div>
+                          </div>
+                      </form>
+                  </div>
+
+                  </div>
+                  <div class="carousel-item">
+                    <!-- Aquí comienza el test -->
+                  <div class="container p-4 d-flex">
+                      <div class="w-100 d-flex justify-content-center flex-column align-items-center" style="z-index: 1;">
+                          <!-- Aquí está el cronómetro y los intentos -->
+                          <div class="w-100 d-flex justify-content-end">
+                              <div class="position-absolute">
+                                  <div class="w-100 d-flex flex-row">
+                                      <div class="mainButton mt-3 m-2 p-2 pr-3 pl-3" id="crono" style="border-width: 4px !important; border-radius: 100px !important;">
+                                          <div class="cronometro d-flex justify-content-center align-items-center flex-row">
+                                              <i class="fa fa-clock-o mr-2" style="font-size:1.5em"></i>
+                                              <h4 class="m-0" id="hms"></h4>
+                                          </div>
+                                      </div>
+                                      <div class="mainButton mt-3 m-2 p-2 pr-3 pl-3 d-flex align-items-center justify-content-center" style="border-width: 4px !important; border-radius: 100px !important;"><h5 class="m-0">Intentos: <strong id="attemps">0</strong></h5></div>
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- Aquí se encuentra el título del Test -->
+                          <div class="mainButton animated pulse infinite ad-3 m-2 p-2 pr-4 pl-4" style="border-width: 4px !important; border-radius: 100px !important;"><h3 class="m-0"><i class="fa fa-pencil"></i> Test</h3></div>
+          
+                          <!-- Aquí comienza el carrusel de los 4 diferentes tests -->
+                          <div id="tests" class="carousel slide w-100" data-ride="carousel" data-interval="false">
+                              <!-- Aquí se encuentran los diferentes botones de los tests -->
+                              <ol class="carousel-indicators" style="bottom: -60px;">
+                                  <li data-target="#tests" data-slide-to="0" class="active"><i class="fa fa-home"></i></li>
+                                  <li data-target="#tests" data-slide-to="1" onclick="test1ModalOpen();">1</li>
+                                  <li data-target="#tests" data-slide-to="2" class="bg-danger text-white" id="number2">2</li>
+                                  <li data-target="#tests" data-slide-to="3" class="bg-danger text-white" id="number3">3</li>
+                                  <li data-target="#tests" data-slide-to="4" class="bg-danger text-white" id="number4">4</li>
+                              </ol>
+                              <div class="carousel-inner w-100">
+                                  <!-- Aquí se encuentra el cuadro de las instrucciones de los tests -->
+                                  <div class="carousel-item active w-100">
+                                    
+                                      <div class="w-100 mainButton p-3 mt-4 d-flex justify-content-center align-items-center flex-column" style="border-radius:50px !important; border-width:5px !important;">
+                                          <div class="w-25 mt-4 d-flex justify-content-center" id="moveIcon">
+                                              <div class="icon-small d-flex justify-content-center align-items-center" style="border-color: rgb(57, 91, 179) !important; width: 80px !important; height: 80px !important;">
+                                                  <img src="./../../assets/Logo-Remasterizado2.png" style="width: 90%;">
+                                              </div>
+                                          </div>
+                                          <div class="w-100 p-4">
+                                              <h2 class="text-center">Bienvenido a <strong>AjedrezM!</strong></h2>
+                                              <h4 class="text-center">
+                                                  A continuación realizarás <strong>4 Tests</strong> para comprobar tus capacidades y así poder ingresar en el modo de juego <strong style="cursor: help; transition: .2s ease-in-out;" onmouseover="$(this).hover(() => {$(this).css('color','var(--warning)')},() =>{$(this).css('color','#68472F')})" data-toggle="tooltip" data-placement="top" data-html="true" 
+                                                  title="Modo de juego con pocas ayudas, descubriendo y experimentando por tu cuenta <i class='text-warning fa fa-search-plus'></i>" 
+                                                  >Normal</strong> o <strong data-toggle="tooltip" data-placement="bottom" data-html="true" style="cursor: help; transition: .2s ease-in-out;" onmouseover="$(this).hover(() => {$(this).css('color','var(--success)')},() =>{$(this).css('color','#68472F')})"
+                                                  title="Modo de juego con muchas ayudas, descubriendo y experimentando con ayuda de <strong>Guías</strong> <i class='text-success fa fa-handshake-o'></i>" 
+                                                  >Diferencial</strong>.
+                                              </h4>
+                                              <h3 class="text-center m-0"><strong>Te deseo mucha suerte!</strong></h3>
+                                          </div>
+          
+                                          <div class="w-100 d-flex justify-content-center mb-4"><button class="text-success levelsBack mainButton p-2 d-flex justify-content-center align-items-center w-50 hvr-float hvr-icon-rotate" style="border-radius:100px !important; border-width:5px !important; font-size: 1.5em; color: var(--success) !important;" data-target="#tests" data-slide-to="1" onclick="test1ModalOpen()"><i class="fa fa-play hvr-icon mr-2"></i> Iniciar</button></div>
+                                              
+                                      </div>
+          
+                                  </div>
+                                  <!-- Aquí se encuentra el primer test -->
+                                  <div class="carousel-item w-100">
+                                      <div class="w-100 d-flex justify-content-center flex-column align-items-center">
+                                          <!-- Aquí se encuentra el botón de ayuda para ver las instrucciones del test -->
+                                          <div class="mt-4 w-100 d-flex justify-content-center align-items-center flex-row">
+                                              <button class="ml-2 p-2 mainButton pr-3 pl-3 animated bounceIn d-flex align-items-center flex-row stop" style="border-width: 3px !important; font-size: 1.3em;" onclick="modal1Level = true; test1ModalOpen();" id="help1Tutorial">
+                                                  <i class="fa fa-file-text hvr-icon"></i>
+                                                  <strong class="m-0 ml-2" id="helpText" style="display:none;">¿Necesitas Ayuda?</strong>
+                                              </button>
+                                          </div>
+                          
+                                          <!-- Aquí se encuentran los 10 íconos para arrastrar -->
+                                          <section class="draggable-elements w-100 d-flex justify-content-center align-items-center flex-column">
+                                              <div class="w-100 d-flex flex-row justify-content-center">
+                                                  <i class="fa fa-pencil draggable" draggable="true" style="color: var(--danger);" id="pencil"></i>
+                                                  <i class="fa fa-bell draggable" draggable="true" style="color: var(--info);" id="bell"></i>
+                                                  <i class="fa fa-home draggable" draggable="true" style="color: var(--pink);" id="home"></i>
+                                                  <i class="fa fa-credit-card draggable" draggable="true" style="color: var(--orange);" id="credit-card"></i>
+                                                  <i class="fa fa-battery-full draggable" draggable="true" style="color: var(--green);" id="battery-full"></i>
+                                              </div>
+                                              <div class="w-100 d-flex flex-row justify-content-center">
+                                                  <i class="fa fa-cube draggable" draggable="true" style="color: var(--yellow);" id="cube"></i>
+                                                  <i class="fa fa-adjust draggable" draggable="true" style="color: var(--purple);" id="adjust"></i>
+                                                  <i class="fa fa-arrows draggable" draggable="true" style="color: var(--indigo);" id="arrows"></i>
+                                                  <i class="fa fa-calculator draggable" draggable="true" style="color: var(--cyan);" id="calculator"></i>
+                                                  <i class="fa fa-ball draggable" draggable="true" style="color: var(--danger);" id="ball"></i>
+                                              </div>
+                                          </section>
+                                          <!-- Aquí se encuetran los cuadros donde se generan los íconos aleatorios y posteriormente se arrastrar hasta aquí -->
+                                          <section class="droppable-elements">
+                                              <div class="droppable animated" data-draggable-id=""></div>
+                                              <div class="droppable animated" data-draggable-id=""></div>
+                                          </section>
+                                          <!-- Aquí está el botón de comenzar -->
+                                          <div class="d-flex flex-row mt-2 justify-content-center" id="test1Buttons">
+                                              <button class="mainButton mr-2 pr-3 pl-3 pt-2 pb-2 hvr-icon-rotate hvr-float d-flex align-items-center text-success" onclick="startMemory();" id="memoryStart"><i class="fa fa-play hvr-icon mr-2" style="font-size: 1.5em;"></i>Comenzar</button>
+                                              <!-- <button class="mainButton pr-3 pl-3 pt-2 pb-2 hvr-icon-rotate hvr-float align-items-center text-info d-none" onclick="resetMemory();" id="resetmemory"><i class="fa fa-refresh hvr-icon mr-2" style="font-size: 1.5em;"></i>Reiniciar</button> -->
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <!-- Aquí se encuentra el test 2 -->
+                                  <div class="carousel-item w-100">
+                                      <!-- Este es el mensaje de error que aparece si aún no completas el test 1 -->
+                                      <div class="w-100 d-flex justify-content-center" id="test2error">
+                                          <div class="w-50 mainButton p-3 mt-4 d-flex justify-content-center align-items-center flex-column" style="border-radius:50px !important; border-width:5px !important;">
+          
+                                              <i class="fa fa-close text-danger" style="font-size: 4em;"></i>
+                                              <div class="w-100 p-4">
+                                                  <h2 class="text-center text-danger"><strong>No Disponible!</strong></h2>
+                                                  <h4 class="text-center">
+                                                      Debes completar los <strong>Tests</strong> anteriores para continuar
+                                                  </h4>
+                                              </div>
+          
+                                          </div>
+                                      </div>
+                                      <!-- Aquí está el contenido del test 2 si ya completaste el test 1 -->
+                                      <div class="w-100 d-none justify-content-center flex-column align-items-center" id="test2success">
+                                        <!-- Aquí está el contador de fallos y el botón para abrir el cuadro de instrucciones del test 2 -->
+                                          <div class="mt-4 w-100 d-flex justify-content-center align-items-center flex-row">
+                                              <div class="mainButton p-2 pr-3 pl-3" style="border-width: 3px !important;">
+                                                  <h4 class="text-danger m-0">Fallos: <strong id="failsA">0</strong></h4>
+                                              </div>
+                                              <button class="ml-2 p-2 mainButton pr-3 pl-3 animated bounceIn d-flex align-items-center flex-row stop" style="border-width: 3px !important; font-size: 1.3em;" onclick="modal2Level = true; test2ModalOpen();" id="help2Tutorial">
+                                                  <i class="fa fa-file-text hvr-icon"></i>
+                                                  <strong class="m-0 ml-2" id="helpText2" style="display:none;">¿Necesitas Ayuda?</strong>
+                                              </button>
+                                          </div>
+
+                                          <!-- Aquí se encuentran los 10 íconos para arrastrar -->
+                                          <section class="draggable-elementsA w-100 d-flex justify-content-center align-items-center flex-column">
+                                              <div class="w-100 d-flex flex-row justify-content-center">
+                                                  <i class="fa fa-pencil draggableA" draggable="true" style="color: var(--danger);" id="pencil"></i>
+                                                  <i class="fa fa-bell draggableA" draggable="true" style="color: var(--info);" id="bell"></i>
+                                                  <i class="fa fa-home draggableA" draggable="true" style="color: var(--pink);" id="home"></i>
+                                                  <i class="fa fa-credit-card draggableA" draggable="true" style="color: var(--orange);" id="credit-card"></i>
+                                                  <i class="fa fa-battery-full draggableA" draggable="true" style="color: var(--green);" id="battery-full"></i>
+                                              </div>
+                                              <div class="w-100 d-flex flex-row justify-content-center">
+                                                  <i class="fa fa-cube draggableA" draggable="true" style="color: var(--yellow);" id="cube"></i>
+                                                  <i class="fa fa-adjust draggableA" draggable="true" style="color: var(--purple);" id="adjust"></i>
+                                                  <i class="fa fa-arrows draggableA" draggable="true" style="color: var(--indigo);" id="arrows"></i>
+                                                  <i class="fa fa-calculator draggableA" draggable="true" style="color: var(--cyan);" id="calculator"></i>
+                                                  <i class="fa fa-camera draggableA" draggable="true" style="color: var(--danger);" id="camera"></i>
+                                              </div>
+                                          </section>
+                                          <!-- Aquí se encuetran los cuadros donde se generan los íconos aleatorios y posteriormente se arrastrar hasta aquí -->
+                                          <section class="droppable-elementsA">
+                                              <div class="droppableA animated" data-draggable-id=""></div>
+                                              <div class="droppableA animated" data-draggable-id=""></div>
+                                              <div class="droppableA animated" data-draggable-id=""></div>
+                                          </section>
+                                          <!-- Aquí está el botón de comenzar -->
+                                          <div class="d-flex flex-row mt-2 justify-content-center" id="test2Buttons">
+                                              <button class="mainButton mr-2 pr-3 pl-3 pt-2 pb-2 hvr-icon-rotate hvr-float d-flex align-items-center text-success" onclick="startMemory2();" id="memoryStart2"><i class="fa fa-play hvr-icon mr-2" style="font-size: 1.5em;"></i>Comenzar</button>
+                                              <!-- <button class="mainButton pr-3 pl-3 pt-2 pb-2 hvr-icon-rotate hvr-float align-items-center text-info d-none" onclick="resetMemory2();" id="resetmemory2"><i class="fa fa-refresh hvr-icon mr-2" style="font-size: 1.5em;"></i>Reiniciar</button> -->
+                                          </div>
+          
+                                      </div>
+          
+                                  </div>
+                                  <!-- Aquí se encuentra el test 3 -->
+                                  <div class="carousel-item w-100">
+                                      <!-- Este es el mensaje de error que aparece si aún no completas el test 2 -->
+                                      <div class="w-100 d-flex justify-content-center" id="test3error">
+                                          <div class="w-50 mainButton p-3 mt-4 d-flex justify-content-center align-items-center flex-column" style="border-radius:50px !important; border-width:5px !important;">
+          
+                                              <i class="fa fa-close text-danger" style="font-size: 4em;"></i>
+                                              <div class="w-100 p-4">
+                                                  <h2 class="text-center text-danger"><strong>No Disponible!</strong></h2>
+                                                  <h4 class="text-center">
+                                                      Debes completar los <strong>Tests</strong> anteriores para continuar
+                                                  </h4>
+                                              </div>
+          
+                                          </div>
+                                      </div>
+                                      <!-- Aquí está el contenido del test 3 si ya completaste el test 2 -->
+                                      <div class="w-100 d-none justify-content-center align-items-center flex-column" id="test3success">
+                                        <!-- Aquí está el contador de fallos y el botón para abrir el cuadro de instrucciones del test 3 -->
+                                          <div class="mt-4 w-100 d-flex justify-content-center align-items-center flex-row">
+                                              <div class="mainButton p-2 pr-3 pl-3" style="border-width: 3px !important;">
+                                                  <h4 class="text-danger m-0">Fallos: <strong id="failsB">0</strong></h4>
+                                              </div>
+                                              <button class="ml-2 p-2 mainButton pr-3 pl-3 animated bounceIn d-flex align-items-center flex-row stop" style="border-width: 3px !important; font-size: 1.3em;" onclick="modal3Level = true; test3ModalOpen();" id="help3Tutorial">
+                                                  <i class="fa fa-file-text hvr-icon"></i>
+                                                  <strong class="m-0 ml-2" id="helpText3" style="display:none;">¿Necesitas Ayuda?</strong>
+                                              </button>
+                                          </div>
+                                          <!-- Aquí se encuentran los 10 íconos para arrastrar -->
+                                          <section class="draggable-elementsB w-100 d-flex justify-content-center align-items-center flex-column">
+                                              <div class="w-100 d-flex flex-row justify-content-center">
+                                                  <i class="fa fa-pencil draggableB" draggable="true" style="color: var(--danger);" id="pencil"></i>
+                                                  <i class="fa fa-bell draggableB" draggable="true" style="color: var(--info);" id="bell"></i>
+                                                  <i class="fa fa-home draggableB" draggable="true" style="color: var(--pink);" id="home"></i>
+                                                  <i class="fa fa-credit-card draggableB" draggable="true" style="color: var(--orange);" id="credit-card"></i>
+                                                  <i class="fa fa-battery-full draggableB" draggable="true" style="color: var(--green);" id="battery-full"></i>
+                                              </div>
+                                              <div class="w-100 d-flex flex-row justify-content-center">
+                                                  <i class="fa fa-cube draggableB" draggable="true" style="color: var(--yellow);" id="cube"></i>
+                                                  <i class="fa fa-adjust draggableB" draggable="true" style="color: var(--purple);" id="adjust"></i>
+                                                  <i class="fa fa-arrows draggableB" draggable="true" style="color: var(--indigo);" id="arrows"></i>
+                                                  <i class="fa fa-calculator draggableB" draggable="true" style="color: var(--cyan);" id="calculator"></i>
+                                                  <i class="fa fa-camera draggableB" draggable="true" style="color: var(--danger);" id="camera"></i>
+                                              </div>
+                                          </section>
+                                          <!-- Aquí se encuetran los cuadros donde se generan los íconos aleatorios y posteriormente se arrastrar hasta aquí -->
+                                          <section class="droppable-elementsB">
+                                              <div class="droppableB animated" data-draggable-id=""></div>
+                                              <div class="droppableB animated" data-draggable-id=""></div>
+                                              <div class="droppableB animated" data-draggable-id=""></div>
+                                              <div class="droppableB animated" data-draggable-id=""></div>
+                                          </section>
+                                          <!-- Aquí está el botón de comenzar, el botón de reiniciar el test 3 y el botón de pasar al test 4 -->
+                                          <div class="d-flex flex-row mt-2 justify-content-center" id="test3Buttons">
+                                              <button class="mainButton mr-2 pr-3 pl-3 pt-2 pb-2 hvr-icon-rotate hvr-float d-flex align-items-center text-success" onclick="startMemory3();" id="memoryStart3"><i class="fa fa-play hvr-icon mr-2" style="font-size: 1.5em;"></i>Comenzar</button>
+                                              <button class="mainButton pr-3 pl-3 pt-2 pb-2 hvr-icon-rotate hvr-float align-items-center text-info d-none" onclick="resetMemory3();" id="resetmemory3"><i class="fa fa-refresh hvr-icon mr-2" style="font-size: 1.5em;"></i>Reiniciar</button>
+                                              <button class="mainButton pr-3 pl-3 pt-2 pb-2 hvr-icon-rotate hvr-float d-flex align-items-center text-success" data-target="#tests" data-slide-to="4" onclick="test4ModalOpen()"><i class="fa fa-arrow-circle-right hvr-icon mr-2" style="font-size: 1.5em;"></i>Siguiente Test</button>
+                                          </div>
+          
+                                      </div>
+          
+                                  </div>
+                                  <!-- Aquí se encuentra el test 4 -->
+                                  <div class="carousel-item w-100">
+                                      <!-- Este es el mensaje de error que aparece si aún no completas el test 2 -->
+                                      <div class="w-100 d-flex justify-content-center" id="test4error">
+                                          <div class="w-50 mainButton p-3 mt-4 d-flex justify-content-center align-items-center flex-column" style="border-radius:50px !important; border-width:5px !important;">
+          
+                                              <i class="fa fa-close text-danger" style="font-size: 4em;"></i>
+                                              <div class="w-100 p-4">
+                                                  <h2 class="text-center text-danger"><strong>No Disponible!</strong></h2>
+                                                  <h4 class="text-center">
+                                                      Debes completar los <strong>Tests</strong> anteriores para continuar
+                                                  </h4>
+                                              </div>
+          
+                                          </div>
+                                      </div>
+                                      <!-- Aquí está el contenido del test 4 si ya completaste el test 2 -->
+                                      <div class="w-100 d-none justify-content-center flex-column align-items-center" id="test4success">
+                                        <!-- Aquí se encuentran la cantidad de secuencias, el nivel de la secuencia y el botón de instrucciones del test 4 -->
+                                          <div class="mt-4 w-100 d-flex justify-content-center align-items-center flex-row">
+                                              <div class="mainButton p-2 pr-3 pl-3" style="border-width: 3px !important;">
+                                                  <h4 class="m-0"><span class="text-info" id="secTxt">Secuencias:</span> <strong class="text-info" id="salida">0/5</strong></h4>
+                                              </div>
+                                              <div class="mainButton p-2 pr-3 pl-3 ml-2" style="border-width: 3px !important;">
+                                                  <h4 class="m-0 animated" id="secuencAnim" style="color: var(--success);">Nivel: <strong id="secuencias">1</strong></h4>
+                                              </div>
+                                              <button class="ml-2 p-2 mainButton pr-3 pl-3 animated bounceIn d-flex align-items-center flex-row stop" style="border-width: 3px !important; font-size: 1.3em;" onclick="modal4Level = true; test4ModalOpen();" id="help4Tutorial">
+                                                  <i class="fa fa-file-text hvr-icon"></i>
+                                                  <strong class="m-0 ml-2" id="helpText4" style="display:none;">¿Necesitas Ayuda?</strong>
+                                              </button>
+                                          </div>
+                                          <!-- Aquí se encuentra el círculo con los 4 colores donde se reproduce la secuencia -->
+                                          <div id="aparato" class="mt-2">
+                                              <div id="verde" class="colorF"></div>
+                                              <div id="rojo" class="colorF"></div>
+                                              <div id="amarillo" class="colorF"></div>
+                                              <div id="azul" class="colorF"></div>
+                                          </div>
+                                          <!-- Aquí está el botón de comenzar -->
+                                          <div class="w-100 mt-2 d-flex justify-content-center" id="test4Buttons">
+                                              <button class="mainButton mr-2 pr-3 pl-3 pt-2 pb-2 hvr-icon-rotate hvr-float align-items-center text-success" id="empezar" style="display:flex;"><i class="fa fa-play hvr-icon mr-2" style="font-size: 1.5em;"></i>Comenzar</button>
+                                          </div>
+          
+                                      </div>
+          
+                                  </div>
+                              </div>
+
+                          </div>
+          
+                      </div>
+                  </div>
+
+                  </div>
+                </div>
+              </div>
+
+          </div>
+        </div>
+  
+      </div>
+    </div>
+
+<script src="./../templates/allTemplate.js"></script>
+<script src="./../controllers/registerController.js"></script>
+</body>
+</html>

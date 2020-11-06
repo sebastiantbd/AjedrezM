@@ -1,0 +1,26 @@
+/* Aquí importamos la librería css de bootstrap */
+@import url('./../../node_modules/bootswatch/dist/flatly/bootstrap.min.css');
+/* Aquí importamos la tipografía de la aplicación llamada Poppins */
+@import url('./../../node_modules/typeface-poppins/index.css');
+/* Aquí importamos la librería de font-awesome donde están todos los íconos de la app */
+@import url('./../../node_modules/font-awesome/css/font-awesome.css');
+/* Aquí importamos la librería animate.css donde hay muchas animaciones que usamos para una mejor interacción gráfica */
+@import url('./../../node_modules/animate.css/animate.min.css');
+/* Aquí importamos la librería de hover.css donde hay animaciones al poner el cursor encima de algún objeto */
+@import url('./../../node_modules/hover.css/css/hover-min.css');
+/* Aquí importamos la librería css de noty que sirven para aparecer alertas con burbujas */
+@import url('./../../node_modules/noty/lib/noty.css');
+/* Aquí importamos el tema que vamos a usar para las alertas de noty */
+@import url('./../../node_modules/noty/lib/themes/sunset.css');
+/* Aquí importamos la librería css de introJS que sirve para hacer la guía paso a paso de cualquier vista */
+@import url('./../../node_modules/intro.js/introjs.css');
+/* Todas estas librerías comentadas son de un indicador de Online - Offline, pero queda obsoleta porque no funcionan muy bien con electronJS */
+/* @import url('./../../node_modules/offline-js/themes/offline-language-spanish-indicator.css');
+@import url('./../../node_modules/offline-js/themes/offline-language-spanish.css');
+@import url('./../../node_modules/offline-js/themes/offline-theme-chrome-indicator.css');
+@import url('./../../node_modules/offline-js/themes/offline-theme-chrome.css'); */
+
+/* Aquí llamamos a la tipografía Poppins globalmente */
+*{
+    font-family: 'Poppins', sans-serif;
+}

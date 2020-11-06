@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="./../templates/allTemplate.css">
+<link rel="stylesheet" href="./../templates/styles.css">
+<title>Estadísticas</title>
+</head>
+<body>
+
+    <div class="w-100" id="colorBack1" style="background: #192A56; height: 100%;  box-shadow: 0 0 100px 0px rgba(0,0,0,0.2) inset !important;">
+        <!-- Esta es la textura de fondo -->
+        <div class="textureBig w-100"></div>
+        <!-- Este es el contenedor principal -->
+        <div class="container p-4 d-flex">
+            <div class="w-100 d-flex justify-content-center flex-column align-items-center" style="z-index: 1;">
+                <!-- Aquí está el ícono de la felcha en la parte superior izquierda que sirve para regresar a la vista del main -->
+                <div class="w-100 justify-content-start">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb position-absolute mt-2 mainButton" id="barra" style="border-radius:100px !important; border-width: 3px !important;">
+                            <li class="breadcrumb-item"><a href="./main.html" class="hvr-icon-grow-rotate" style="border-width: 4px !important; border-radius: 100px !important;"><i class="fa fa-arrow-left hvr-icon" style="font-size: 1.5em;"></i></a></li>
+                        </ol>
+                    </nav>
+                </div>
+                <!-- Este es el título de estadísticas -->
+                <div class="mainButton animated pulse infinite ad-3 m-2 p-2 pr-4 pl-4" style="border-width: 4px !important; border-radius: 100px !important;"><h3 class="m-0"><i class="fa fa-tasks"></i> Estadísticas</h3></div>
+                <!-- Esta es la fila que divide a la sección de estadísticas y figuras formadas -->
+                <div class="row w-100 mt-5">
+                    <!-- Esta es la sección de estadísticas donde están los diferentes datos del usuario -->
+                    <div class="col-md-6">
+                        <!-- Este contenedor hace que no haya scroll -->
+                        <div class="scroll-none" style="overflow: auto; height: 470px !important;">
+                            <!-- esta es la sombra en la parte inferior del contenedor -->
+                        <div class="position-fixed" style="margin-top: 430px; width: 615px; overflow: hidden; z-index: 2;">
+                            <div style="margin-left: -100px; height: 40px; width: 615px; box-shadow: 0 -15px 15px rgba(0, 0, 0, 0.2) inset;"></div>
+                        </div>
+                        <!-- Esta es la tabla con las estadísticas -->
+                        <table class="table table-hover mainTable m-0">
+                            <tbody>
+                            <tr>
+                                <td>Tiempo total:</td>
+                                <td class="w-50"><strong id='crono'>00:00:00</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Partidas jugadas:</td>
+                                <td><strong>200</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Movimientos realizados:</td>
+                                <td><strong>3256</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Retos cumplidos:</td>
+                                <td><strong>25</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Niveles completados:</td>
+                                <td><strong>63</strong></td>
+                            </tr>
+
+                            <tr>
+                                <td>Figuras formadas:</td>
+                                <td><strong>17</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Puntos realizados:</td>
+                                <td><strong>25</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Fallos:</td>
+                                <td><strong>2536</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Victorias:</td>
+                                <td><strong>158</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Derrotas:</td>
+                                <td><strong>18</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Caballos:</td>
+                                <td><strong>4</strong></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                    <!-- Esta es la sección con las figuras formadas -->
+                    <div class="col-md-6">
+                        <div>
+                            <!-- Este es el título de las figuras formadas -->
+                            <div class="container d-flex justify-content-start align-items-end position-absolute" style="z-index: 1;">
+                                <div class="mainButton p-2 d-flex align-items-center justify-content-center" style="margin-top: -15px;"><h5 class="m-0">Figuras formadas</h5></div>
+                            </div>
+                            <!-- este es el contenedor de todas las figuras formadas -->
+                            <div class="row mainButton p-3 d-flex justify-content-center align-items-center scroll-none" style="border-radius:50px !important; border-width:5px !important; overflow: auto; height: 470px;">
+
+                                <div class="col-md-6 d-flex justify-content-center p-1">
+                                    <div class="card w-100 mb-1">
+                                        <img src="./../../assets/angles/angulo-obtuso.jpg" class="card-img-top">
+                                        <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                                            <h5 class="card-title">130°</h5>
+                                            <button class="btn btn-primary" data-toggle="modal" data-target="#figuras"><i class="fa fa-eye" style="font-size:1.5em;"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 d-flex justify-content-center p-1">
+                                    <div class="card w-100 mb-1">
+                                        <img src="./../../assets/angles/recto.png" class="card-img-top">
+                                        <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                                            <h5 class="card-title">90°</h5>
+                                            <button class="btn btn-primary" data-toggle="modal" data-target="#figuras"><i class="fa fa-eye" style="font-size:1.5em;"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 d-flex justify-content-center p-1">
+                                    <div class="card w-100 mb-1">
+                                        <img src="./../../assets/angles/angulo-obtuso.jpg" class="card-img-top">
+                                        <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                                            <h5 class="card-title">130°</h5>
+                                            <button class="btn btn-primary" data-toggle="modal" data-target="#figuras"><i class="fa fa-eye" style="font-size:1.5em;"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 d-flex justify-content-center p-1">
+                                    <div class="card w-100 mb-1">
+                                        <img src="./../../assets/angles/angulo-obtuso.jpg" class="card-img-top">
+                                        <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                                            <h5 class="card-title">130°</h5>
+                                            <button class="btn btn-primary" data-toggle="modal" data-target="#figuras"><i class="fa fa-eye" style="font-size:1.5em;"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal que aparece al presionar en el botón del ojo que está en las figuras formadas, aquí sólo está la imagen y hace cuanto la formó-->
+    <div class="modal fade" id="figuras" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="color:#68472F;">130°</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="./../../assets/angles/angulo-obtuso.jpg" class="card-img-top">
+            </div>
+            <div class="modal-footer justify-content-start">
+                <div class="mainButton d-flex flex-row justify-content-center align-items-center p-2">
+                    <i class="fa fa-clock-o mr-1"></i> 
+                    <p class="text-capitalize m-0" id="created"></p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+<script src="./../templates/allTemplate.js"></script>
+<script src="./../controllers/statsController.js"></script>
+</body>
+</html>

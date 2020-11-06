@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="./../templates/allTemplate.css">
+<link rel="stylesheet" href="./../templates/styles.css">
+<title>Configuración</title>
+</head>
+<body>
+
+    <div class="w-100" id="colorBack1" style="background: #192A56; height: 100%;  box-shadow: 0 0 100px 0px rgba(0,0,0,0.2) inset !important;">
+        <!-- Esta es la textura de las figuras geométricas que está de fondo -->
+        <div class="textureBig w-100"></div>
+    <!-- Este es el contenedor donde están todas las opciones de Configuración -->
+        <div class="container p-4 d-flex">
+            <div class="w-100 d-flex justify-content-center flex-column align-items-center" style="z-index: 1;">
+                <!-- Aquí está el ícono de la felcha en la parte superior izquierda que sirve para regresar a la vista del main -->
+                <div class="w-100 justify-content-start">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb position-absolute mt-2 mainButton" id="barra" style="border-radius:100px !important; border-width: 3px !important;">
+                            <li class="breadcrumb-item"><a href="./main.html" class="hvr-icon-grow-rotate" style="border-width: 4px !important; border-radius: 100px !important;"><i class="fa fa-arrow-left hvr-icon" style="font-size: 1.5em;"></i></a></li>
+                        </ol>
+                    </nav>
+                </div>
+                <!-- Este es el título de Configuración -->
+                <div class="mainButton animated pulse infinite ad-3 m-2 p-2 pr-4 pl-4" style="border-width: 4px !important; border-radius: 100px !important;"><h3 class="m-0"><i class="fa fa-cog"></i> Configuración</h3></div>
+                <!-- Esta es la fila que contiene a la opción de cambiar el color del fondo principal y del secundario -->
+                <div class="row w-100 mt-5">
+                    <!-- Este es el contenedor que cambia el color del fondo principal -->
+                    <div class="col-md-6">
+                        <label for="back1" class="row mainButton m-2 p-3" style="border-width: 4px !important; border-radius: 100px !important; cursor: pointer;">
+                            <div class="col-md-3"><input type="color" value="#192A56" class="form-control" id="back1" style="cursor: pointer;"></div>
+                            <div class="col-md-9"><h3 class="m-0">Fondo 1</h3></div>
+                        </label>
+                    </div>
+                    <!-- Este es el contenedor que cambia el color del fondo secundario -->
+                    <div class="col-md-6">
+                        <label for="back2" class="row mainButton m-2 p-3" style="border-width: 4px !important; border-radius: 100px !important; cursor: pointer;">
+                            <div class="col-md-3"><input type="color" value="#FFEDCE" class="form-control" id="back2" style="cursor: pointer;"></div>
+                            <div class="col-md-9"><h3 class="m-0">Fondo 2</h3></div>
+                        </label>
+                    </div>
+                </div>
+                <!-- Esta es la fila que contiene a la opción de cambiar el color de la casilla del tablero uno y dos -->
+                <div class="row w-100 mt-3">
+                    <!-- Este es el contenedor que cambia el color de la casilla del tablero uno-->
+                    <div class="col-md-6">
+                        <label for="tab1" class="row mainButton m-2 p-3" style="border-width: 4px !important; border-radius: 100px !important; cursor: pointer;">
+                            <div class="col-md-3"><input type="color" value="#2B2B2B" class="form-control" id="tab1" style="cursor: pointer;"></div>
+                            <div class="col-md-9"><h3 class="m-0">Casilla 1</h3></div>
+                        </label>
+                    </div>
+                    <!-- Este es el contenedor que cambia el color de la casilla del tablero dos-->
+                    <div class="col-md-6">
+                        <label for="tab2" class="row mainButton m-2 p-3" style="border-width: 4px !important; border-radius: 100px !important; cursor: pointer;">
+                            <div class="col-md-3"><input type="color" value="#ffffff" class="form-control" id="tab2" style="cursor: pointer;"></div>
+                            <div class="col-md-9"><h3 class="m-0">Casilla 2</h3></div>
+                        </label>
+                    </div>
+                </div>
+                <!-- Esta es la fila que contiene a la opción de cambiar el tipo de caballo, el nivel del sonido y el idioma del juego -->
+                <div class="row w-100 mt-3">
+                    <!-- Esta es la sección que contiene los diferentes tipos de caballos para seleccionar -->
+                    <div class="col-md-6">
+                        <div class="mainButton m-2 p-3" style="border-width: 4px !important; border-radius: 50px !important;">
+                            <h3 class="m-0 text-center">Caballos</h3>
+                            <!-- Esta es la fila que divide a los caballos WhiteSoul y SpringSun -->
+                            <div class="row container mt-4">
+                                <div class="col-md-6 d-flex flex-row justify-content-center align-items-center hvr-float" horse="white" onclick="checkHorse(this)" style="cursor: pointer;">
+                                    <!-- Aquí está el ícono del check que indica que el caballo ha sido seleccionado -->
+                                    <div class="checkHorses w-100 d-flex justify-content-start align-items-start position-absolute">
+                                        <div class="mainButton text-success pr-1 pl-1" style="margin-top: -30px;"><i class="fa fa-check"></i></div>
+                                    </div>
+                                    <img src="./../../assets/pieces/whiteHorse.png" class="w-25">
+                                    <h4 class="m-0">WhiteSoul</h4>
+                                </div>
+                                <div class="col-md-6 d-flex flex-row justify-content-center align-items-center hvr-float" horse="yellow" onclick="checkHorse(this)" style="cursor: pointer;">
+                                    <img src="./../../assets/pieces/springHorse.png" class="w-25">
+                                    <h4 class="m-0">SpringSun</h4>
+                                </div>
+                            </div>
+                            <!-- Esta es la fila que divide a los caballos SkyClear y burningHorse -->
+                            <div class="row container mt-4 mb-4">
+                                <div class="col-md-6 d-flex flex-row justify-content-center align-items-center hvr-float" horse="blue" onclick="checkHorse(this)" style="cursor: pointer;">
+                                    <img src="./../../assets/pieces/skyHorse.png" class="w-25">
+                                    <h4 class="m-0">SkyClear</h4>
+                                </div>
+                                <div class="col-md-6 d-flex flex-row justify-content-center align-items-center hvr-float" horse="red" onclick="checkHorse(this)" style="cursor: pointer;">
+                                    <img src="./../../assets/pieces/burningHorse.png" class="w-25">
+                                    <h4 class="m-0">BurningFire</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Este es el contenedor que tiene el nivel de sonido y el idioma del juego -->
+                    <div class="col-md-6">
+                        <div class="row mainButton m-2 p-3" style="border-width: 4px !important; border-radius: 100px !important;">
+                            <!-- Aquí está el número donde indica el nivel de sonido en que está el juego -->
+                            <div class="d-flex justify-content-end align-items-end position-absolute" style="width: 80%;">
+                                <div class="mainButton text-success d-flex align-items-center justify-content-center" style="margin-top: -35px; width: 35px; height: 35px;"><p class="m-0 text-success" id="soundValue">50</p></div>
+                            </div>
+                            <!-- Aquí está el título y el input tipo rango para denotar el nivel del sonido -->
+                            <div class="col-md-4"><h3 class="m-0">Sonido</h3></div>
+                            <div class="col-md-8 d-flex align-items-center"><input type="range" class="form-control-range" id="sound"></div>
+                        </div>
+
+                        <div class="row mainButton mt-5 m-2 p-3" style="border-width: 4px !important; border-radius: 100px !important;">
+                            <!-- Este es el título del idioma -->
+                            <div class="col-md-4 d-flex align-items-center"><h3 class="m-0">Idioma</h3></div>
+                            <div class="col-md-8 d-flex justify-content-end align-items-center">
+                            <!-- Aquí está la imagen del idioma seleccionado -->
+                                <div class="icon-small mr-2">
+                                    <img src="./../../assets/flags/spain.png" id="imgLanguage" class="w-100">
+                                </div>
+                                <!-- Aquí está la selección con ambas opciones del idioma -->
+                                <select name="language" id="language" style="border: 0 !important; cursor: pointer;" class="w-75 form-control">
+                                    <option value="spanish">Español</option>
+                                    <option value="english">Inglés</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+    </div>
+
+<script src="./../templates/allTemplate.js"></script>
+<script src="./../controllers/configController.js"></script>
+</body>
+</html>

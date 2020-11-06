@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="./../../templates/Trophies-Online-Offline-Templates/allTemplate.css">
+<link rel="stylesheet" href="./../../templates/styles.css">
+<title>Multijugador</title>
+</head>
+<body style="overflow-x: hidden;">
+
+    <div class="w-100" id="colorBack1" style="background: #192A56; height: 100%;  box-shadow: 0 0 100px 0px rgba(0,0,0,0.2) inset !important;">
+        <!-- Esta es la textura de fondo -->
+        <div class="textureBig w-100"></div>
+        <!-- Este es el logo rotatorio que está en el centro de la pantalla -->
+        <div class="logoCenter w-100">
+            <div class="w-25 mt-4 d-flex justify-content-center animated bounce infinite ad-5" id="moveIcon">
+                <div class="icon d-flex justify-content-center align-items-center" style="border-color: rgb(57, 91, 179) !important;">
+                    <img src="./../../../assets/Logo-Remasterizado2.png" style="width: 90%;">
+                </div>
+            </div>
+        </div>
+        <div class="pt-4 d-flex" style="padding-left: 10%; padding-right: 10%;">
+            <div class="w-100 d-flex justify-content-center flex-column align-items-center">
+                <!-- Este es el contenedor donde están los puntos y el botón de deshacer jugada -->
+                <div class="w-100 d-flex justify-content-start" style="z-index: 7;">
+                    <div class="position-absolute d-flex flex-row">
+                        <!-- Esta es la información de los puntos -->
+                        <div class="inGameContUp m-1 p-2" style="border-width: 4px !important; border-radius: 100px !important;">
+                            <div class="mainButton p-2 d-flex flex-row align-items-center">
+                                <h6 class="m-0 mr-2">Puntos</h6>
+                                <div class="blackCircle"><span class="mr-2 ml-2" id="score">0 de 64</span></div>
+                            </div>
+                        </div>
+                        <!-- Este es el botón es deshacer jugada -->
+                        <div class="inGameContUp m-1 p-2" style="border-width: 4px !important; border-radius: 100px !important;">
+                            <button class="inGameButtons hvr-icon-wobble-horizontal"  onclick="this.classList = 'disabledTrophy inGameButtons'"><i class="fa fa-undo hvr-icon"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Este es el contenedor donde está la imagen, el nombre y el nivel Online del usuario, el botón del modal de instrucciones del nivel y el botón de trofeos de la categoría creativa  -->
+                <div class="w-100 d-flex justify-content-end" style="z-index: 7;">
+                    <div class="position-absolute d-flex justify-content-end">
+                        <!-- Esta es la imagen, el nombre y el nivel Online del usuario -->
+                        <div class="mainButton pr-3 pl-3 mr-2 d-flex justify-content-start align-items-center" style="border-width: 4px !important; border-radius: 100px !important;">
+                            <div class="d-flex justify-content-end align-items-start position-absolute" style="width: 48%;" id="OnlineLevel2">
+                                
+                            </div>
+                            <div class="d-flex justify-content-center" style="width: 30px; height: 30px; border-radius: 100%; overflow: hidden;">
+                                <img src="./../../../assets/user.gif" height="100%">
+                            </div>
+                            <h6 class="m-0 ml-2 nameUser"></h6>
+                        </div>
+                        <div class="inGameContUp m-1 p-2" style="border-width: 4px !important; border-radius: 25px !important;">
+                            <!-- Este es el botón del modal de instrucciones del nivel -->
+                            <button class="inGameButtons hvr-icon-grow-rotate mr-2" data-toggle="modal" data-target="#objectiveModal"><i class="fa fa-file-text hvr-icon"></i></button>
+                            <!-- Este es el botón del modal de los trofeos de la categoría Creativa -->
+                            <button class="inGameButtons hvr-icon-grow-rotate mr-2" data-toggle="modal" data-target="#trophiesModal"><i class="fa fa-trophy hvr-icon"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Este es el contenedor donde está el botón de regresar a la vista de la categoría Experta, el cronómetro y el botón de repetir nivel -->
+                <div class="inGameContUp mb-4 w-25 d-flex justify-content-around m-1 p-2" style="z-index: 7;">
+                    <!-- Este es el botón de regresar a la vista de la categoría Creativa -->
+                    <button class="inGameButtons d-flex hvr-icon-back" id="exit"><i class="fa fa-arrow-left hvr-icon"></i></button>
+                    <!-- Este es el temporizador -->
+                    <div class="mainButton d-flex align-items-center justify-content-center pr-2 pl-2">
+                        <h4 id="cuenta" class="m-0 text-danger">0</h4>
+                    </div>
+                    <!-- Este es el cronómetro -->
+                    <div class="mainButton d-flex align-items-center justify-content-center pr-2 pl-2">
+                        <div class="cronometro">
+                            <h4 class="m-0" id="hms"></h4>
+                        </div>
+                    </div>
+                    <!-- Este es el botón de reiniciar el nivel -->
+                    <button class="inGameButtons reiniciar hvr-icon-spin" id="reset" onclick="this.classList = 'disabledTrophy inGameButtons'"><i class="fa fa-refresh hvr-icon"></i></button>
+                </div>
+                <!-- Esta es la fila que divide al tablero de ajedrez, el cuadro de figuras y la figura a realizar -->
+                <div class="row w-100">
+                    <!-- Esta es la sección donde está el tablero de ajedrez -->
+                    <div class="col-md-8 p-0" style="z-index: 2;">
+                        <div class="w-100 mb-2 d-flex align-items-start flex-column">
+
+                            <!-- Esta es la información de las coordenadas -->
+                            <div class="mainButton p-1" style="z-index: 1; border-color: var(--blackChess) !important; color: var(--blackChess);"><i class="fa fa-arrows"></i> <span id="coordenadas">(0,0)</span></div>
+
+                            <div style="height:75vh; overflow:auto;">
+                            <!-- Aquí está todo el tablero de ajedrez -->
+                            <div class="chessBox p-2">
+
+                                <table style="border-style:solid;" id="tabla">
+                                    <tr>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 !important;"></td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">1</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">2</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">3</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">4</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">5</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">6</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">7</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">8</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">9</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">10</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">11</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">12</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">13</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">14</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">15</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">16</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">17</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">18</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">19</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">20</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">1</td>
+                                        <td id = "elem00" onclick="SquareClicked('elem00')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem01" onclick="SquareClicked('elem01')" style="background-color: white;"></td>
+                                        <td id = "elem02" onclick="SquareClicked('elem02')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem03" onclick="SquareClicked('elem03')" style="background-color: white;"></td>
+                                        <td id = "elem04" onclick="SquareClicked('elem04')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem05" onclick="SquareClicked('elem05')" style="background-color: white;"></td>
+                                        <td id = "elem06" onclick="SquareClicked('elem06')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem07" onclick="SquareClicked('elem07')" style="background-color: white;"></td>
+                                        <td id = "elem08" onclick="SquareClicked('elem08')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem09" onclick="SquareClicked('elem09')" style="background-color: white;"></td>
+                                        <td id = "elem10" onclick="SquareClicked('elem10')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem11" onclick="SquareClicked('elem11')" style="background-color: white;"></td>
+                                        <td id = "elem12" onclick="SquareClicked('elem12')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem13" onclick="SquareClicked('elem13')" style="background-color: white;"></td>
+                                        <td id = "elem14" onclick="SquareClicked('elem14')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem15" onclick="SquareClicked('elem15')" style="background-color: white;"></td>
+                                        <td id = "elem16" onclick="SquareClicked('elem16')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem17" onclick="SquareClicked('elem17')" style="background-color: white;"></td>
+                                        <td id = "elem18" onclick="SquareClicked('elem18')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem19" onclick="SquareClicked('elem19')" style="background-color: white;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">2</td>
+                                        <td id = "elem20" onclick="SquareClicked('elem20')" style="background-color: white;"></td>
+                                        <td id = "elem21" onclick="SquareClicked('elem21')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem22" onclick="SquareClicked('elem22')" style="background-color: white;"></td>
+                                        <td id = "elem23" onclick="SquareClicked('elem23')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem24" onclick="SquareClicked('elem24')" style="background-color: white;"></td>
+                                        <td id = "elem25" onclick="SquareClicked('elem25')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem26" onclick="SquareClicked('elem26')" style="background-color: white;"></td>
+                                        <td id = "elem27" onclick="SquareClicked('elem27')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem28" onclick="SquareClicked('elem28')" style="background-color: white;"></td>
+                                        <td id = "elem29" onclick="SquareClicked('elem29')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem30" onclick="SquareClicked('elem30')" style="background-color: white;"></td>
+                                        <td id = "elem31" onclick="SquareClicked('elem31')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem32" onclick="SquareClicked('elem32')" style="background-color: white;"></td>
+                                        <td id = "elem33" onclick="SquareClicked('elem33')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem34" onclick="SquareClicked('elem34')" style="background-color: white;"></td>
+                                        <td id = "elem35" onclick="SquareClicked('elem35')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem36" onclick="SquareClicked('elem36')" style="background-color: white;"></td>
+                                        <td id = "elem37" onclick="SquareClicked('elem37')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem38" onclick="SquareClicked('elem38')" style="background-color: white;"></td>
+                                        <td id = "elem39" onclick="SquareClicked('elem39')" style="background-color: var(--blackChess);" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">3</td>
+                                        <td id = "elem40" onclick="SquareClicked('elem40')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem41" onclick="SquareClicked('elem41')" style="background-color: white;"></td>
+                                        <td id = "elem42" onclick="SquareClicked('elem42')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem43" onclick="SquareClicked('elem43')" style="background-color: white;"></td>
+                                        <td id = "elem44" onclick="SquareClicked('elem44')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem45" onclick="SquareClicked('elem45')" style="background-color: white;"></td>
+                                        <td id = "elem46" onclick="SquareClicked('elem46')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem47" onclick="SquareClicked('elem47')" style="background-color: white;"></td>
+                                        <td id = "elem48" onclick="SquareClicked('elem48')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem49" onclick="SquareClicked('elem49')" style="background-color: white;"></td>
+                                        <td id = "elem50" onclick="SquareClicked('elem50')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem51" onclick="SquareClicked('elem51')" style="background-color: white;"></td>
+                                        <td id = "elem52" onclick="SquareClicked('elem52')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem53" onclick="SquareClicked('elem53')" style="background-color: white;"></td>
+                                        <td id = "elem54" onclick="SquareClicked('elem54')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem55" onclick="SquareClicked('elem55')" style="background-color: white;"></td>
+                                        <td id = "elem56" onclick="SquareClicked('elem56')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem57" onclick="SquareClicked('elem57')" style="background-color: white;"></td>
+                                        <td id = "elem58" onclick="SquareClicked('elem58')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem59" onclick="SquareClicked('elem59')" style="background-color: white;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">4</td>
+                                        <td id = "elem60" onclick="SquareClicked('elem60')" style="background-color: white;"></td>
+                                        <td id = "elem61" onclick="SquareClicked('elem61')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem62" onclick="SquareClicked('elem62')" style="background-color: white;"></td>
+                                        <td id = "elem63" onclick="SquareClicked('elem63')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem64" onclick="SquareClicked('elem64')" style="background-color: white;"></td>
+                                        <td id = "elem65" onclick="SquareClicked('elem65')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem66" onclick="SquareClicked('elem66')" style="background-color: white;"></td>
+                                        <td id = "elem67" onclick="SquareClicked('elem67')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem68" onclick="SquareClicked('elem68')" style="background-color: white;"></td>
+                                        <td id = "elem69" onclick="SquareClicked('elem69')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem70" onclick="SquareClicked('elem70')" style="background-color: white;"></td>
+                                        <td id = "elem71" onclick="SquareClicked('elem71')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem72" onclick="SquareClicked('elem72')" style="background-color: white;"></td>
+                                        <td id = "elem73" onclick="SquareClicked('elem73')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem74" onclick="SquareClicked('elem74')" style="background-color: white;"></td>
+                                        <td id = "elem75" onclick="SquareClicked('elem75')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem76" onclick="SquareClicked('elem76')" style="background-color: white;"></td>
+                                        <td id = "elem77" onclick="SquareClicked('elem77')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem78" onclick="SquareClicked('elem78')" style="background-color: white;"></td>
+                                        <td id = "elem79" onclick="SquareClicked('elem79')" style="background-color: var(--blackChess);" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">5</td>
+                                        <td id = "elem80" onclick="SquareClicked('elem80')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem81" onclick="SquareClicked('elem81')" style="background-color: white;"></td>
+                                        <td id = "elem82" onclick="SquareClicked('elem82')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem83" onclick="SquareClicked('elem83')" style="background-color: white;"></td>
+                                        <td id = "elem84" onclick="SquareClicked('elem84')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem85" onclick="SquareClicked('elem85')" style="background-color: white;"></td>
+                                        <td id = "elem86" onclick="SquareClicked('elem86')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem87" onclick="SquareClicked('elem87')" style="background-color: white;"></td>
+                                        <td id = "elem88" onclick="SquareClicked('elem88')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem89" onclick="SquareClicked('elem89')" style="background-color: white;"></td>
+                                        <td id = "elem90" onclick="SquareClicked('elem90')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem91" onclick="SquareClicked('elem91')" style="background-color: white;"></td>
+                                        <td id = "elem92" onclick="SquareClicked('elem92')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem93" onclick="SquareClicked('elem93')" style="background-color: white;"></td>
+                                        <td id = "elem94" onclick="SquareClicked('elem94')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem95" onclick="SquareClicked('elem95')" style="background-color: white;"></td>
+                                        <td id = "elem96" onclick="SquareClicked('elem96')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem97" onclick="SquareClicked('elem97')" style="background-color: white;"></td>
+                                        <td id = "elem98" onclick="SquareClicked('elem98')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem99" onclick="SquareClicked('elem99')" style="background-color: white;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">6</td>
+                                        <td id = "elem100" onclick="SquareClicked('elem100')" style="background-color: white;"></td>
+                                        <td id = "elem101" onclick="SquareClicked('elem101')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem102" onclick="SquareClicked('elem102')" style="background-color: white;"></td>
+                                        <td id = "elem103" onclick="SquareClicked('elem103')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem104" onclick="SquareClicked('elem104')" style="background-color: white;"></td>
+                                        <td id = "elem105" onclick="SquareClicked('elem105')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem106" onclick="SquareClicked('elem106')" style="background-color: white;"></td>
+                                        <td id = "elem107" onclick="SquareClicked('elem107')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem108" onclick="SquareClicked('elem108')" style="background-color: white;"></td>
+                                        <td id = "elem109" onclick="SquareClicked('elem109')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem110" onclick="SquareClicked('elem110')" style="background-color: white;"></td>
+                                        <td id = "elem111" onclick="SquareClicked('elem111')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem112" onclick="SquareClicked('elem112')" style="background-color: white;"></td>
+                                        <td id = "elem113" onclick="SquareClicked('elem113')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem114" onclick="SquareClicked('elem114')" style="background-color: white;"></td>
+                                        <td id = "elem115" onclick="SquareClicked('elem115')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem116" onclick="SquareClicked('elem116')" style="background-color: white;"></td>
+                                        <td id = "elem117" onclick="SquareClicked('elem117')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem118" onclick="SquareClicked('elem118')" style="background-color: white;"></td>
+                                        <td id = "elem119" onclick="SquareClicked('elem119')" style="background-color: var(--blackChess);" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">7</td>
+                                        <td id = "elem120" onclick="SquareClicked('elem120')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem121" onclick="SquareClicked('elem121')" style="background-color: white;"></td>
+                                        <td id = "elem122" onclick="SquareClicked('elem122')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem123" onclick="SquareClicked('elem123')" style="background-color: white;"></td>
+                                        <td id = "elem124" onclick="SquareClicked('elem124')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem125" onclick="SquareClicked('elem125')" style="background-color: white;"></td>
+                                        <td id = "elem126" onclick="SquareClicked('elem126')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem127" onclick="SquareClicked('elem127')" style="background-color: white;"></td>
+                                        <td id = "elem128" onclick="SquareClicked('elem128')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem129" onclick="SquareClicked('elem129')" style="background-color: white;"></td>
+                                        <td id = "elem130" onclick="SquareClicked('elem130')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem131" onclick="SquareClicked('elem131')" style="background-color: white;"></td>
+                                        <td id = "elem132" onclick="SquareClicked('elem132')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem133" onclick="SquareClicked('elem133')" style="background-color: white;"></td>
+                                        <td id = "elem134" onclick="SquareClicked('elem134')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem135" onclick="SquareClicked('elem135')" style="background-color: white;"></td>
+                                        <td id = "elem136" onclick="SquareClicked('elem136')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem137" onclick="SquareClicked('elem137')" style="background-color: white;"></td>
+                                        <td id = "elem138" onclick="SquareClicked('elem138')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem139" onclick="SquareClicked('elem139')" style="background-color: white;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">8</td>
+                                        <td id = "elem140" onclick="SquareClicked('elem140')" style="background-color: white;"></td>
+                                        <td id = "elem141" onclick="SquareClicked('elem141')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem142" onclick="SquareClicked('elem142')" style="background-color: white;"></td>
+                                        <td id = "elem143" onclick="SquareClicked('elem143')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem144" onclick="SquareClicked('elem144')" style="background-color: white;"></td>
+                                        <td id = "elem145" onclick="SquareClicked('elem145')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem146" onclick="SquareClicked('elem146')" style="background-color: white;"></td>
+                                        <td id = "elem147" onclick="SquareClicked('elem147')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem148" onclick="SquareClicked('elem148')" style="background-color: white;"></td>
+                                        <td id = "elem149" onclick="SquareClicked('elem149')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem150" onclick="SquareClicked('elem150')" style="background-color: white;"></td>
+                                        <td id = "elem151" onclick="SquareClicked('elem151')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem152" onclick="SquareClicked('elem152')" style="background-color: white;"></td>
+                                        <td id = "elem153" onclick="SquareClicked('elem153')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem154" onclick="SquareClicked('elem154')" style="background-color: white;"></td>
+                                        <td id = "elem155" onclick="SquareClicked('elem155')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem156" onclick="SquareClicked('elem156')" style="background-color: white;"></td>
+                                        <td id = "elem157" onclick="SquareClicked('elem157')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem158" onclick="SquareClicked('elem158')" style="background-color: white;"></td>
+                                        <td id = "elem159" onclick="SquareClicked('elem159')" style="background-color: var(--blackChess);" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">9</td>
+                                        <td id = "elem160" onclick="SquareClicked('elem160')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem161" onclick="SquareClicked('elem161')" style="background-color: white;"></td>
+                                        <td id = "elem162" onclick="SquareClicked('elem162')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem163" onclick="SquareClicked('elem163')" style="background-color: white;"></td>
+                                        <td id = "elem164" onclick="SquareClicked('elem164')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem165" onclick="SquareClicked('elem165')" style="background-color: white;"></td>
+                                        <td id = "elem166" onclick="SquareClicked('elem166')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem167" onclick="SquareClicked('elem167')" style="background-color: white;"></td>
+                                        <td id = "elem168" onclick="SquareClicked('elem168')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem169" onclick="SquareClicked('elem169')" style="background-color: white;"></td>
+                                        <td id = "elem170" onclick="SquareClicked('elem170')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem171" onclick="SquareClicked('elem171')" style="background-color: white;"></td>
+                                        <td id = "elem172" onclick="SquareClicked('elem172')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem173" onclick="SquareClicked('elem173')" style="background-color: white;"></td>
+                                        <td id = "elem174" onclick="SquareClicked('elem174')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem175" onclick="SquareClicked('elem175')" style="background-color: white;"></td>
+                                        <td id = "elem176" onclick="SquareClicked('elem176')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem177" onclick="SquareClicked('elem177')" style="background-color: white;"></td>
+                                        <td id = "elem178" onclick="SquareClicked('elem178')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem179" onclick="SquareClicked('elem179')" style="background-color: white;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">10</td>
+                                        <td id = "elem180" onclick="SquareClicked('elem180')" style="background-color: white;"></td>
+                                        <td id = "elem181" onclick="SquareClicked('elem181')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem182" onclick="SquareClicked('elem182')" style="background-color: white;"></td>
+                                        <td id = "elem183" onclick="SquareClicked('elem183')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem184" onclick="SquareClicked('elem184')" style="background-color: white;"></td>
+                                        <td id = "elem185" onclick="SquareClicked('elem185')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem186" onclick="SquareClicked('elem186')" style="background-color: white;"></td>
+                                        <td id = "elem187" onclick="SquareClicked('elem187')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem188" onclick="SquareClicked('elem188')" style="background-color: white;"></td>
+                                        <td id = "elem189" onclick="SquareClicked('elem189')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem190" onclick="SquareClicked('elem190')" style="background-color: white;"></td>
+                                        <td id = "elem191" onclick="SquareClicked('elem191')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem192" onclick="SquareClicked('elem192')" style="background-color: white;"></td>
+                                        <td id = "elem193" onclick="SquareClicked('elem193')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem194" onclick="SquareClicked('elem194')" style="background-color: white;"></td>
+                                        <td id = "elem195" onclick="SquareClicked('elem195')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem196" onclick="SquareClicked('elem196')" style="background-color: white;"></td>
+                                        <td id = "elem197" onclick="SquareClicked('elem197')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem198" onclick="SquareClicked('elem198')" style="background-color: white;"></td>
+                                        <td id = "elem199" onclick="SquareClicked('elem199')" style="background-color: var(--blackChess);" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">11</td>
+                                        <td id = "elem200" onclick="SquareClicked('elem200')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem201" onclick="SquareClicked('elem201')" style="background-color: white;"></td>
+                                        <td id = "elem202" onclick="SquareClicked('elem202')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem203" onclick="SquareClicked('elem203')" style="background-color: white;"></td>
+                                        <td id = "elem204" onclick="SquareClicked('elem204')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem205" onclick="SquareClicked('elem205')" style="background-color: white;"></td>
+                                        <td id = "elem206" onclick="SquareClicked('elem206')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem207" onclick="SquareClicked('elem207')" style="background-color: white;"></td>
+                                        <td id = "elem208" onclick="SquareClicked('elem208')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem209" onclick="SquareClicked('elem209')" style="background-color: white;"></td>
+                                        <td id = "elem210" onclick="SquareClicked('elem210')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem211" onclick="SquareClicked('elem211')" style="background-color: white;"></td>
+                                        <td id = "elem212" onclick="SquareClicked('elem212')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem213" onclick="SquareClicked('elem213')" style="background-color: white;"></td>
+                                        <td id = "elem214" onclick="SquareClicked('elem214')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem215" onclick="SquareClicked('elem215')" style="background-color: white;"></td>
+                                        <td id = "elem216" onclick="SquareClicked('elem216')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem217" onclick="SquareClicked('elem217')" style="background-color: white;"></td>
+                                        <td id = "elem218" onclick="SquareClicked('elem218')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem219" onclick="SquareClicked('elem219')" style="background-color: white;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">12</td>
+                                        <td id = "elem220" onclick="SquareClicked('elem220')" style="background-color: white;"></td>
+                                        <td id = "elem221" onclick="SquareClicked('elem221')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem222" onclick="SquareClicked('elem222')" style="background-color: white;"></td>
+                                        <td id = "elem223" onclick="SquareClicked('elem223')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem224" onclick="SquareClicked('elem224')" style="background-color: white;"></td>
+                                        <td id = "elem225" onclick="SquareClicked('elem225')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem226" onclick="SquareClicked('elem226')" style="background-color: white;"></td>
+                                        <td id = "elem227" onclick="SquareClicked('elem227')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem228" onclick="SquareClicked('elem228')" style="background-color: white;"></td>
+                                        <td id = "elem229" onclick="SquareClicked('elem229')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem230" onclick="SquareClicked('elem230')" style="background-color: white;"></td>
+                                        <td id = "elem231" onclick="SquareClicked('elem231')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem232" onclick="SquareClicked('elem232')" style="background-color: white;"></td>
+                                        <td id = "elem233" onclick="SquareClicked('elem233')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem234" onclick="SquareClicked('elem234')" style="background-color: white;"></td>
+                                        <td id = "elem235" onclick="SquareClicked('elem235')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem236" onclick="SquareClicked('elem236')" style="background-color: white;"></td>
+                                        <td id = "elem237" onclick="SquareClicked('elem237')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem238" onclick="SquareClicked('elem238')" style="background-color: white;"></td>
+                                        <td id = "elem239" onclick="SquareClicked('elem239')" style="background-color: var(--blackChess);" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">13</td>
+                                        <td id = "elem240" onclick="SquareClicked('elem240')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem241" onclick="SquareClicked('elem241')" style="background-color: white;"></td>
+                                        <td id = "elem242" onclick="SquareClicked('elem242')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem243" onclick="SquareClicked('elem243')" style="background-color: white;"></td>
+                                        <td id = "elem244" onclick="SquareClicked('elem244')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem245" onclick="SquareClicked('elem245')" style="background-color: white;"></td>
+                                        <td id = "elem246" onclick="SquareClicked('elem246')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem247" onclick="SquareClicked('elem247')" style="background-color: white;"></td>
+                                        <td id = "elem248" onclick="SquareClicked('elem248')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem249" onclick="SquareClicked('elem249')" style="background-color: white;"></td>
+                                        <td id = "elem250" onclick="SquareClicked('elem250')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem251" onclick="SquareClicked('elem251')" style="background-color: white;"></td>
+                                        <td id = "elem252" onclick="SquareClicked('elem252')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem253" onclick="SquareClicked('elem253')" style="background-color: white;"></td>
+                                        <td id = "elem254" onclick="SquareClicked('elem254')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem255" onclick="SquareClicked('elem255')" style="background-color: white;"></td>
+                                        <td id = "elem256" onclick="SquareClicked('elem256')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem257" onclick="SquareClicked('elem257')" style="background-color: white;"></td>
+                                        <td id = "elem258" onclick="SquareClicked('elem258')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem259" onclick="SquareClicked('elem259')" style="background-color: white;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">14</td>
+                                        <td id = "elem260" onclick="SquareClicked('elem260')" style="background-color: white;"></td>
+                                        <td id = "elem261" onclick="SquareClicked('elem261')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem262" onclick="SquareClicked('elem262')" style="background-color: white;"></td>
+                                        <td id = "elem263" onclick="SquareClicked('elem263')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem264" onclick="SquareClicked('elem264')" style="background-color: white;"></td>
+                                        <td id = "elem265" onclick="SquareClicked('elem265')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem266" onclick="SquareClicked('elem266')" style="background-color: white;"></td>
+                                        <td id = "elem267" onclick="SquareClicked('elem267')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem268" onclick="SquareClicked('elem268')" style="background-color: white;"></td>
+                                        <td id = "elem269" onclick="SquareClicked('elem269')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem270" onclick="SquareClicked('elem270')" style="background-color: white;"></td>
+                                        <td id = "elem271" onclick="SquareClicked('elem271')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem272" onclick="SquareClicked('elem272')" style="background-color: white;"></td>
+                                        <td id = "elem273" onclick="SquareClicked('elem273')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem274" onclick="SquareClicked('elem274')" style="background-color: white;"></td>
+                                        <td id = "elem275" onclick="SquareClicked('elem275')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem276" onclick="SquareClicked('elem276')" style="background-color: white;"></td>
+                                        <td id = "elem277" onclick="SquareClicked('elem277')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem278" onclick="SquareClicked('elem278')" style="background-color: white;"></td>
+                                        <td id = "elem279" onclick="SquareClicked('elem279')" style="background-color: var(--blackChess);" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">15</td>
+                                        <td id = "elem280" onclick="SquareClicked('elem280')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem281" onclick="SquareClicked('elem281')" style="background-color: white;"></td>
+                                        <td id = "elem282" onclick="SquareClicked('elem282')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem283" onclick="SquareClicked('elem283')" style="background-color: white;"></td>
+                                        <td id = "elem284" onclick="SquareClicked('elem284')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem285" onclick="SquareClicked('elem285')" style="background-color: white;"></td>
+                                        <td id = "elem286" onclick="SquareClicked('elem286')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem287" onclick="SquareClicked('elem287')" style="background-color: white;"></td>
+                                        <td id = "elem288" onclick="SquareClicked('elem288')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem289" onclick="SquareClicked('elem289')" style="background-color: white;"></td>
+                                        <td id = "elem290" onclick="SquareClicked('elem290')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem291" onclick="SquareClicked('elem291')" style="background-color: white;"></td>
+                                        <td id = "elem292" onclick="SquareClicked('elem292')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem293" onclick="SquareClicked('elem293')" style="background-color: white;"></td>
+                                        <td id = "elem294" onclick="SquareClicked('elem294')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem295" onclick="SquareClicked('elem295')" style="background-color: white;"></td>
+                                        <td id = "elem296" onclick="SquareClicked('elem296')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem297" onclick="SquareClicked('elem297')" style="background-color: white;"></td>
+                                        <td id = "elem298" onclick="SquareClicked('elem298')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem299" onclick="SquareClicked('elem299')" style="background-color: white;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">16</td>
+                                        <td id = "elem300" onclick="SquareClicked('elem300')" style="background-color: white;"></td>
+                                        <td id = "elem301" onclick="SquareClicked('elem301')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem302" onclick="SquareClicked('elem302')" style="background-color: white;"></td>
+                                        <td id = "elem303" onclick="SquareClicked('elem303')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem304" onclick="SquareClicked('elem304')" style="background-color: white;"></td>
+                                        <td id = "elem305" onclick="SquareClicked('elem305')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem306" onclick="SquareClicked('elem306')" style="background-color: white;"></td>
+                                        <td id = "elem307" onclick="SquareClicked('elem307')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem308" onclick="SquareClicked('elem308')" style="background-color: white;"></td>
+                                        <td id = "elem309" onclick="SquareClicked('elem309')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem310" onclick="SquareClicked('elem310')" style="background-color: white;"></td>
+                                        <td id = "elem311" onclick="SquareClicked('elem311')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem312" onclick="SquareClicked('elem312')" style="background-color: white;"></td>
+                                        <td id = "elem313" onclick="SquareClicked('elem313')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem314" onclick="SquareClicked('elem314')" style="background-color: white;"></td>
+                                        <td id = "elem315" onclick="SquareClicked('elem315')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem316" onclick="SquareClicked('elem316')" style="background-color: white;"></td>
+                                        <td id = "elem317" onclick="SquareClicked('elem317')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem318" onclick="SquareClicked('elem318')" style="background-color: white;"></td>
+                                        <td id = "elem319" onclick="SquareClicked('elem319')" style="background-color: var(--blackChess);" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">17</td>
+                                        <td id = "elem320" onclick="SquareClicked('elem320')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem321" onclick="SquareClicked('elem321')" style="background-color: white;"></td>
+                                        <td id = "elem322" onclick="SquareClicked('elem322')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem323" onclick="SquareClicked('elem323')" style="background-color: white;"></td>
+                                        <td id = "elem324" onclick="SquareClicked('elem324')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem325" onclick="SquareClicked('elem325')" style="background-color: white;"></td>
+                                        <td id = "elem326" onclick="SquareClicked('elem326')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem327" onclick="SquareClicked('elem327')" style="background-color: white;"></td>
+                                        <td id = "elem328" onclick="SquareClicked('elem328')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem329" onclick="SquareClicked('elem329')" style="background-color: white;"></td>
+                                        <td id = "elem330" onclick="SquareClicked('elem330')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem331" onclick="SquareClicked('elem331')" style="background-color: white;"></td>
+                                        <td id = "elem332" onclick="SquareClicked('elem332')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem333" onclick="SquareClicked('elem333')" style="background-color: white;"></td>
+                                        <td id = "elem334" onclick="SquareClicked('elem334')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem335" onclick="SquareClicked('elem335')" style="background-color: white;"></td>
+                                        <td id = "elem336" onclick="SquareClicked('elem336')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem337" onclick="SquareClicked('elem337')" style="background-color: white;"></td>
+                                        <td id = "elem338" onclick="SquareClicked('elem338')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem339" onclick="SquareClicked('elem339')" style="background-color: white;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">18</td>
+                                        <td id = "elem340" onclick="SquareClicked('elem340')" style="background-color: white;"></td>
+                                        <td id = "elem341" onclick="SquareClicked('elem341')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem342" onclick="SquareClicked('elem342')" style="background-color: white;"></td>
+                                        <td id = "elem343" onclick="SquareClicked('elem343')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem344" onclick="SquareClicked('elem344')" style="background-color: white;"></td>
+                                        <td id = "elem345" onclick="SquareClicked('elem345')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem346" onclick="SquareClicked('elem346')" style="background-color: white;"></td>
+                                        <td id = "elem347" onclick="SquareClicked('elem347')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem348" onclick="SquareClicked('elem348')" style="background-color: white;"></td>
+                                        <td id = "elem349" onclick="SquareClicked('elem349')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem350" onclick="SquareClicked('elem350')" style="background-color: white;"></td>
+                                        <td id = "elem351" onclick="SquareClicked('elem351')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem352" onclick="SquareClicked('elem352')" style="background-color: white;"></td>
+                                        <td id = "elem353" onclick="SquareClicked('elem353')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem354" onclick="SquareClicked('elem354')" style="background-color: white;"></td>
+                                        <td id = "elem355" onclick="SquareClicked('elem355')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem356" onclick="SquareClicked('elem356')" style="background-color: white;"></td>
+                                        <td id = "elem357" onclick="SquareClicked('elem357')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem358" onclick="SquareClicked('elem358')" style="background-color: white;"></td>
+                                        <td id = "elem359" onclick="SquareClicked('elem359')" style="background-color: var(--blackChess);" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">19</td>
+                                        <td id = "elem360" onclick="SquareClicked('elem360')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem361" onclick="SquareClicked('elem361')" style="background-color: white;"></td>
+                                        <td id = "elem362" onclick="SquareClicked('elem362')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem363" onclick="SquareClicked('elem363')" style="background-color: white;"></td>
+                                        <td id = "elem364" onclick="SquareClicked('elem364')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem365" onclick="SquareClicked('elem365')" style="background-color: white;"></td>
+                                        <td id = "elem366" onclick="SquareClicked('elem366')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem367" onclick="SquareClicked('elem367')" style="background-color: white;"></td>
+                                        <td id = "elem368" onclick="SquareClicked('elem368')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem369" onclick="SquareClicked('elem369')" style="background-color: white;"></td>
+                                        <td id = "elem370" onclick="SquareClicked('elem370')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem371" onclick="SquareClicked('elem371')" style="background-color: white;"></td>
+                                        <td id = "elem372" onclick="SquareClicked('elem372')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem373" onclick="SquareClicked('elem373')" style="background-color: white;"></td>
+                                        <td id = "elem374" onclick="SquareClicked('elem374')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem375" onclick="SquareClicked('elem375')" style="background-color: white;"></td>
+                                        <td id = "elem376" onclick="SquareClicked('elem376')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem377" onclick="SquareClicked('elem377')" style="background-color: white;"></td>
+                                        <td id = "elem378" onclick="SquareClicked('elem378')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem379" onclick="SquareClicked('elem379')" style="background-color: white;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">20</td>
+                                        <td id = "elem380" onclick="SquareClicked('elem380')" style="background-color: white;"></td>
+                                        <td id = "elem381" onclick="SquareClicked('elem381')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem382" onclick="SquareClicked('elem382')" style="background-color: white;"></td>
+                                        <td id = "elem383" onclick="SquareClicked('elem383')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem384" onclick="SquareClicked('elem384')" style="background-color: white;"></td>
+                                        <td id = "elem385" onclick="SquareClicked('elem385')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem386" onclick="SquareClicked('elem386')" style="background-color: white;"></td>
+                                        <td id = "elem387" onclick="SquareClicked('elem387')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem388" onclick="SquareClicked('elem388')" style="background-color: white;"></td>
+                                        <td id = "elem389" onclick="SquareClicked('elem389')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem390" onclick="SquareClicked('elem390')" style="background-color: white;"></td>
+                                        <td id = "elem391" onclick="SquareClicked('elem391')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem392" onclick="SquareClicked('elem392')" style="background-color: white;"></td>
+                                        <td id = "elem393" onclick="SquareClicked('elem393')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem394" onclick="SquareClicked('elem394')" style="background-color: white;"></td>
+                                        <td id = "elem395" onclick="SquareClicked('elem395')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem396" onclick="SquareClicked('elem396')" style="background-color: white;"></td>
+                                        <td id = "elem397" onclick="SquareClicked('elem397')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem398" onclick="SquareClicked('elem398')" style="background-color: white;"></td>
+                                        <td id = "elem399" onclick="SquareClicked('elem399')" style="background-color: var(--blackChess);" ></td>
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                            <h3 id="result" class="m-0 text-white text-center"></h3>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Aquí está la sección donde está el cuadro de figuras y la figura a realizar -->
+                    <div class="col-md-4 d-flex justify-content-end p-0" style="z-index: 5;">
+                        <div class="position-fixed">
+
+                            <!-- Este es el cuadro de figuras -->
+                            <div class="p-2 chessBox" style="width: 320px; height: 320px; border-width: 4px !important; border-radius: 25px !important;">
+                                <!-- Este es el título de Figuras -->
+                                <div class=" d-flex justify-content-start align-items-end position-absolute" style="z-index: 1;">
+                                    <div class="mainButton p-1 d-flex align-items-center justify-content-center" style="margin-top: -15px;"><h7 class="m-0">Figuras</h7></div>
+                                </div>
+                                <!-- Este es el lienzo donde se dibujan las figuras -->
+                                <div class="mainButton p-2 d-flex justify-content-center align-items-center w-100" style="height: 100%; background: #ffedce !important;">
+                                    
+                                </div>
+                            </div>
+
+                            <!-- Este es el cuadro donde está la figura a realizar -->
+                            <div class="chessBox p-2" style="width: 320px;">
+                                <div class="mainButton p-2 d-flex flex-column" style="border-radius: 25px !important; background: #ffedce !important;">
+                                    <!-- Este es el título de Figura a realizar -->
+                                    <h6 class="m-0 text-center mb-2">Figura a realizar</h6>
+                                    <!-- Esta es la imagen de la figura -->
+                                    <div class="mainButton w-100">
+                                        <img src="./../../../assets/angles/angulo-obtuso.jpg" style="border-radius: 25px; " class="mt-2 w-100">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de los trofeos de la categoría Creativa -->
+    <div class="modal fade" id="trophiesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle" style="color: #68472F;"><i class="fa fa-trophy"></i> Logros</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="mainButton p-2 d-flex justify-content-start flex-column align-items-center" style="height: 100%; background: #ffedce !important;">
+                    <div class="position-fixed" style="margin-top: 260px; width: 462px; overflow: hidden; z-index: 2;">
+                        <div style="margin-left: -100px; height: 20px; width: 600px; box-shadow: 0 -10px 10px rgba(0, 0, 0, 0.2) inset;"></div>
+                    </div>
+                    <div class="w-100 scroll-none position-relative mb-3" style="height: 280px; overflow: auto; z-index: 1;">
+                        <div class="d-flex flex-row justify-content-start align-items-center mainButton p-1 m-1" style="border-radius: 100px !important;">
+                            <div class="d-flex flex-row justify-content-end align-items-start position-absolute" style="width: 95%;">
+                                <div class="mainButton text-success d-flex justify-content-center align-items-center p-1" style="margin-top: -20px;"><i class="fa fa-check"></i></div>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center w-25 mr-2">
+                                <img src="./../../../assets/trophiesIcons/star.png" class="w-50">
+                            </div>
+                            <div class="d-flex justify-content-center align-items-start flex-column pr-4">
+                                <strong class="m-0" style="font-size:1em">Estrella</strong>
+                                <p class="m-0" style="font-size:1em">Arma una Estrella en el cuadro de figuras</p>
+                            </div>
+                        </div>
+                        <div class="disabledTrophy d-flex flex-row justify-content-start align-items-center mainButton p-1 m-1" style="border-radius: 100px !important;">
+                            <div class="d-flex justify-content-center align-items-center w-25 mr-2">
+                                <img src="./../../../assets/trophiesIcons/triangle.png" class="w-50">
+                            </div>
+                            <div class="d-flex justify-content-center align-items-start flex-column pr-4">
+                                <strong class="m-0" style="font-size: 1em;">Triángulo</strong>
+                                <p class="m-0" style="font-size:1em">Arma un Triángulo en el cuadro de figuras</p>
+                            </div>
+                        </div>
+                        <div class="disabledTrophy d-flex flex-row justify-content-start align-items-center mainButton p-1 m-1" style="border-radius: 100px !important;">
+                            <div class="d-flex justify-content-center align-items-center w-25 mr-2">
+                                <img src="./../../../assets/trophiesIcons/square.png" class="w-50">
+                            </div>
+                            <div class="d-flex justify-content-center align-items-start flex-column pr-4">
+                                <strong class="m-0" style="font-size: 1em;">Cuadrado</strong>
+                                <p class="m-0" style="font-size:1em">Arma un Cuadrado en el cuadro de figuras</p>
+                            </div>
+                        </div>
+                        <div class="disabledTrophy d-flex flex-row justify-content-start align-items-center mainButton p-1 m-1" style="border-radius: 100px !important;">
+                            <div class="d-flex justify-content-center align-items-center w-25 mr-2">
+                                <img src="./../../../assets/trophiesIcons/pyramid.png" class="w-50">
+                            </div>
+                            <div class="d-flex justify-content-center align-items-start flex-column">
+                                <strong class="m-0" style="font-size: 1em;">Pirámide</strong>
+                                <p class="m-0" style="font-size:1em">Arma una Pirámide en el cuadro de figuras</p>
+                            </div>
+                        </div>
+                        <div class="disabledTrophy d-flex flex-row justify-content-start align-items-center mainButton p-1 m-1" style="border-radius: 100px !important;">
+                            <div class="d-flex justify-content-center align-items-center w-25 mr-2">
+                                <img src="./../../../assets/trophiesIcons/cube.png" class="w-50">
+                            </div>
+                            <div class="d-flex justify-content-center align-items-start flex-column">
+                                <strong class="m-0" style="font-size: 1em;">Cubo</strong>
+                                <p class="m-0" style="font-size:1em">Arma un Cubo en el cuadro de figuras</p>
+                            </div>
+                        </div>
+
+                    </div>                                        
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+    <!-- Modal de las instrucciones del nivel -->
+    <div class="modal fade" id="objectiveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle" style="color: #68472F;"><i class="fa fa-file-text"></i> Instrucciones</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="mainButton p-2 d-flex justify-content-center flex-column align-items-center" style="height: 100%; background: #ffedce !important;">
+                    <img src="./../../../assets/expertMode.jpg" class="w-100" style="border-radius: 25px !important; box-shadow: 0 0 10px 1px rgba(0,0,0,0.2);">
+                    <h5 class="m-0 text-center w-75 mt-2">Derrota a tu contrincante armando las figuras <i class="fa fa-image"></i> que se muestren en pantalla en menos de <strong class="text-danger">5 minutos!</strong></h5>                                         
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+<script src="../../templates/Trophies-Online-Offline-Templates/allTemplate.js"></script>
+<script src="./../../controllers/Online/OnlineExpertGameController.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="./../templates/allTemplate.css">
+<link rel="stylesheet" href="./../templates/styles.css">
+<title>Mi Perfil</title>
+</head>
+<body>
+
+    <div class="w-100" id="colorBack1" style="background: #192A56; height: 100%;  box-shadow: 0 0 100px 0px rgba(0,0,0,0.2) inset !important;">
+        <!-- Esta es la textura de fondo -->
+        <div class="textureBig w-100"></div>
+        <!-- Este es el contenedor principal -->
+        <div class="container p-4 d-flex">
+            <div class="w-100 d-flex justify-content-center flex-column align-items-center" style="z-index: 1;">
+                <!-- Aquí está el ícono de la felcha en la parte superior izquierda que sirve para regresar a la vista del main -->
+                <div class="w-100 justify-content-start">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb position-absolute mt-2 mainButton" id="barra" style="border-radius:100px !important; border-width: 3px !important;">
+                            <li class="breadcrumb-item"><a href="./main.html" class="hvr-icon-grow-rotate" style="border-width: 4px !important; border-radius: 100px !important;"><i class="fa fa-arrow-left hvr-icon" style="font-size: 1.5em;"></i></a></li>
+                        </ol>
+                    </nav>
+                </div>
+                <!-- Aquí está el título de Mi Perfil -->
+                <div class="mainButton animated pulse infinite ad-3 m-2 p-2 pr-4 pl-4" style="border-width: 4px !important; border-radius: 100px !important;"><h3 class="m-0"><i class="fa fa-user"></i> Mi Perfil</h3></div>
+                <!-- Esta es la fila que contiene los datos personales y el cambio de la contraseña -->
+                <div class="row w-100 mt-5">
+                    <!-- Esta es la sección de los datos personales -->
+                    <div class="col-md-6">
+                        <!-- Aquí esta la imagen de fondo en modo visualización y en modo editor -->
+                        <div class="form-group d-flex justify-content-center">
+                            <div class="icon-medium d-flex justify-content-center align-items-center" id="imgNormal">
+                                <img src="./../../assets/user.png" class="w-100" id="imgBasic">
+                            </div>
+                            <label for="img"  class="icon-medium d-none justify-content-center align-items-center" style="cursor: pointer;" id="imgInput">
+                                <div class="bgBlackShadowIco-medium justify-content-center text-center">
+                                    <p class="text-white mb-0 text-ico" style="transition: 0.3s ease-in-out;">Cambiar Imagen</p>
+                                </div>
+                                <img src="./../../assets/user.png" id="imgBack" style="height: 100%">
+                            </label>
+                            <input type="file" name="img" id="img" style="visibility: hidden; position: absolute;">
+                        </div>
+                        <div class="container">
+                            <!-- Aquí está el formulario de los datos personales -->
+                         <form id="profileForm">
+                            <div>
+                                <!-- Este es el texto de Usuario -->
+                                <div class="container d-flex justify-content-start align-items-end position-absolute">
+                                    <div class="mainButton p-2 d-flex align-items-center justify-content-center" style="margin-top: -15px;"><h5 class="m-0">Usuario</h5></div>
+                                </div>
+                                <div class="mainButton p-3 m-4 d-flex justify-content-center align-items-center" style="border-radius:100px !important; border-width:5px !important">
+                                    <!-- Este es el nombre del usuario en modo visualización -->
+                                    <h4 class="m-0 nameUser" id="userText"></h4>
+                                    <!-- Aquí está el input para cambiar el nombre del usuario en modo editor -->
+                                    <input type="text" name="user" class="form-control w-75 d-none" id="userInput" value="" placeholder="Usuario">
+                                </div>
+                            </div>
+                            <div>
+                                <!-- Este es el texto de Correo -->
+                                <div class="container d-flex justify-content-start align-items-end position-absolute">
+                                    <div class="mainButton p-2 d-flex align-items-center justify-content-center" style="margin-top: -15px;"><h5 class="m-0">Correo</h5></div>
+                                </div>
+                                <div class="mainButton p-3 m-4 d-flex justify-content-center align-items-center" style="border-radius:100px !important; border-width:5px !important">
+                                    <!-- Este es el correo del usuario en modo visualización -->
+                                    <h5 class="m-0" id="emailText"></h5>
+                                    <!-- Aquí está el input para cambiar el correo del usuario en modo editor -->
+                                    <input type="email" name="email" class="form-control w-75 d-none" id="emailInput" value="danielsteven1994@gmail.com" placeholder="Correo">
+                                </div>
+                            </div>
+                            <div>
+                                <!-- Este es el texto del Sexo -->
+                                <div class="container d-flex justify-content-start align-items-end position-absolute">
+                                    <div class="mainButton p-2 d-flex align-items-center justify-content-center" style="margin-top: -15px;"><h5 class="m-0">Sexo</h5></div>
+                                </div>
+                                <div class="mainButton p-3 m-4 d-flex justify-content-center align-items-center" style="border-radius:100px !important; border-width:5px !important">
+                                    <!-- Este es el sexo del usuario en modo visualización -->
+                                    <h5 class="m-0" id="sexText"></h5>
+                                    <!-- Aquí está el select para cambiar el sexo del usuario en modo editor -->
+                                    <select name="sex" class="form-control w-75 d-none" id="sexInput">
+                                        <option value="-1">Seleccione...</option>
+                                        <option value="man" class="bg-primary text-white" selected>Hombre</option>
+                                        <option value="woman" class="text-white" style="background: orchid;">Mujer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="w-100 d-flex justify-content-center">
+                                <!-- Este es el botón para cambiar a modo editor -->
+                                <button type="button" id="editButton" onclick="edit()" class="m-2 btn mainButton hvr-float hvr-icon-grow-rotate" style="border-radius: 100% !important; width: 50px; height: 50px;"><h4 class="m-0"><i class="fa fa-pencil hvr-icon"></i></h4></button>
+                                <!-- Este es el botón de cancelar para devolverse a modo visualización -->
+                                <button type="button" id="cancelButton" onclick="cancel()" class="m-2 text-danger btn mainButton hvr-float hvr-icon-grow-rotate d-none" style="border-radius: 100% !important; width: 50px; height: 50px;"><h4 class="m-0"><i class="fa fa-close hvr-icon"></i></h4></button>
+                                <!-- Aquí está el botón de actualizar para cambiar los datos personales -->
+                                <button type="submit" id="updateButton" class="m-2 text-success btn mainButton hvr-float hvr-icon-grow-rotate d-none" style="border-radius: 100% !important; width: 50px; height: 50px;"><h4 class="m-0"><i class="fa fa-rotate-right hvr-icon"></i></h4></button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                    <!-- Esta es la sección del cambio de la contraseña -->
+                    <div class="col-md-6">
+                        <div class="container">
+                            <!-- Aquí está el formulario del cambio de contraseña -->
+                            <form id="passwordForm">
+                                <div>
+                                    <!-- Este es el texto de la Contraseña -->
+                                    <div class="container d-flex justify-content-start align-items-end position-absolute">
+                                        <div class="mainButton p-2 d-flex align-items-center justify-content-center" style="margin-top: -15px;"><h5 class="m-0">Contraseña</h5></div>
+                                    </div>
+                                    <!-- Este es el input de la actual contraseña -->
+                                    <div class="mainButton p-3 m-4 d-flex justify-content-center align-items-center" style="border-radius:100px !important; border-width:5px !important">
+                                        <input type="password" name="currentPass" class="form-control w-75" id="currentPass" placeholder="Contraseña Actual">
+                                    </div>
+                                </div>
+                                <div>
+                                    <!-- Este es el input de la nueva contraseña -->
+                                    <div class="mainButton p-3 m-4 d-flex justify-content-center align-items-center" style="border-radius:100px !important; border-width:5px !important">
+                                        <input type="password" name="newPass" class="form-control w-75" id="newPass" placeholder="Nueva Contraseña">
+                                    </div>
+                                </div>
+                                <div>
+                                    <!-- Este es el input de repetir la nueva contraseña -->
+                                    <div class="mainButton p-3 m-4 d-flex justify-content-center align-items-center" style="border-radius:100px !important; border-width:5px !important">
+                                        <input type="password" name="repeatPass" class="form-control w-75" id="repeatPass" placeholder="Repita Nueva Contraseña">
+                                    </div>
+                                </div>
+                                <!-- Este es el botón de cambiar la contraseña -->
+                                <div class="w-100 d-flex justify-content-center">
+                                    <button type="submit" id="updateButtonPassword" class="m-2 text-success btn mainButton hvr-float hvr-icon-grow-rotate" style="border-radius: 100% !important; width: 50px; height: 50px;"><h4 class="m-0"><i class="fa fa-rotate-right hvr-icon"></i></h4></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<script src="./../templates/allTemplate.js"></script>
+<script src="./../controllers/profileController.js"></script>
+</body>
+</html>

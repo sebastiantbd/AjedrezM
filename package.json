@@ -1,0 +1,84 @@
+{
+  "name": "ajedrezm",
+  "productName": "AjedrezM",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron src/index.js",
+    "rebuild": "electron-rebuild -f -w sqlite3",
+    "postinstall": "electron-builder install-app-deps",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Electron Tutorial App\"",
+    "package-linux": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds",
+    "pack": "build --dir",
+    "dist": "electron-builder"
+  },
+  "author": "AjedrezM <danielsteven1994@gmail.com>",
+  "description": "An Awesome Horse Chess Game!",
+  "license": "MIT",
+  "build": {
+    "appId": "AjedrezM-v1",
+    "asar": true,
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "Appimage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "NSIS",
+      "icon": "assets/icons/win/icon.ico"
+    }
+  },
+  "keywords": [],
+  "devDependencies": {
+    "electron": "^6.0.12",
+    "electron-builder": "^22.2.0",
+    "electron-rebuild": "^1.8.6"
+  },
+  "dependencies": {
+    "animate.css": "^3.7.2",
+    "babel-preset-env": "^1.7.0",
+    "bcryptjs": "^2.4.3",
+    "bootstrap": "^4.3.1",
+    "bootstrap-tooltip": "^3.1.1",
+    "bootswatch": "^4.3.1",
+    "browser-window": "^0.4.0",
+    "custom-electron-titlebar": "^3.1.0",
+    "electron-packager": "^14.0.6",
+    "electron-reload": "^1.5.0",
+    "font-awesome": "^4.7.0",
+    "hover.css": "^2.3.2",
+    "i18n": "^0.8.5",
+    "intro.js": "^2.9.3",
+    "jquery": "^3.4.1",
+    "jquery-ui": "^1.12.1",
+    "js-base64": "^2.5.1",
+    "knex": "^0.19.5",
+    "mo-js": "^0.288.2",
+    "moment": "^2.24.0",
+    "mysql": "^2.17.1",
+    "nodemailer": "^6.3.1",
+    "noty": "^3.2.0-beta",
+    "offline-js": "^0.7.19",
+    "popper.js": "^1.16.0",
+    "remote": "^0.2.6",
+    "sqlite3": "^4.1.1",
+    "sweetalert2": "^9.1.0",
+    "typeface-poppins": "0.0.72"
+  }
+}

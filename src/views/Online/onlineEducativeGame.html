@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="./../../templates/Trophies-Online-Offline-Templates/allTemplate.css">
+<link rel="stylesheet" href="./../../templates/styles.css">
+<title>Multijugador</title>
+</head>
+<body>
+
+    <div class="w-100" id="colorBack1" style="background: #192A56; height: 100%;  box-shadow: 0 0 100px 0px rgba(0,0,0,0.2) inset !important;">
+        <!-- Esta es la textura de fondo -->
+        <div class="textureBig w-100"></div>
+        <!-- Este es el logo rotatorio que está en el centro de la pantalla -->
+        <div class="logoCenter w-100">
+            <div class="w-25 mt-4 d-flex justify-content-center animated bounce infinite ad-5" id="moveIcon">
+                <div class="icon d-flex justify-content-center align-items-center" style="border-color: rgb(57, 91, 179) !important;">
+                    <img src="./../../../assets/Logo-Remasterizado2.png" style="width: 90%;">
+                </div>
+            </div>
+        </div>
+        <div class="pt-4 d-flex" style="padding-left: 10%; padding-right: 10%;">
+            <div class="w-100 d-flex justify-content-center flex-column align-items-center">
+                <!-- Este es el contenedor donde está la información del nivel, los puntos y el botón de deshacer jugada -->
+                <div class="w-100 d-flex justify-content-start" style="z-index: 5;">
+                    <div class="position-absolute d-flex flex-row">
+                        <!-- Esta es la información del el nivel -->
+                        <div class="inGameContUp m-1 p-2" style="border-width: 4px !important; border-radius: 100px !important;">
+                            <div class="mainButton p-2 d-flex flex-row align-items-center">
+                                <h6 class="m-0 mr-2">Nivel</h6>
+                                <div class="blackCircle"><span class="mr-2 ml-2">1</span></div>
+                            </div>
+                        </div>
+                        <!-- Esta es la información de los puntos -->
+                        <div class="inGameContUp m-1 p-2" style="border-width: 4px !important; border-radius: 100px !important;">
+                            <div class="mainButton p-2 d-flex flex-row align-items-center">
+                                <h6 class="m-0 mr-2">Puntos</h6>
+                                <div class="blackCircle"><span class="mr-2 ml-2" id="score">0 de 64</span></div>
+                            </div>
+                        </div>
+                        <!-- Este es el botón es deshacer jugada -->
+                        <div class="inGameContUp m-1 p-2" style="border-width: 4px !important; border-radius: 100px !important;">
+                            <button class="inGameButtons hvr-icon-wobble-horizontal" onclick="this.classList = 'disabledTrophy inGameButtons'"><i class="fa fa-undo hvr-icon"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Este es el contenedor donde está la imagen, el nombre y el nivel Online del usuario, el botón del modal de instrucciones del nivel y el botón de trofeos de la categoría educativa  -->
+                <div class="w-100 d-flex justify-content-end" style="z-index: 5;">
+                    <div class="position-absolute d-flex justify-content-end">
+                        <!-- Esta es la imagen, el nombre y el nivel Online del usuario -->
+                        <div class="mainButton pr-3 pl-3 mr-2 d-flex justify-content-start align-items-center" style="border-width: 4px !important; border-radius: 100px !important;">
+                            <div class="d-flex justify-content-end align-items-start position-absolute" style="width: 47%;" id="OnlineLevel2">
+                                
+                            </div>
+                            <div class="d-flex justify-content-center" style="width: 30px; height: 30px; border-radius: 100%; overflow: hidden;">
+                                <img src="./../../../assets/user.gif" height="100%">
+                            </div>
+                            <h6 class="m-0 ml-2 nameUser"></h6>
+                        </div>
+                        <div class="inGameContUp m-1 p-2" style="border-width: 4px !important; border-radius: 25px !important;">
+                            <!-- Este es el botón del modal de instrucciones del nivel -->
+                            <button class="inGameButtons hvr-icon-grow-rotate mr-2" data-toggle="modal" data-target="#objectiveModal"><i class="fa fa-file-text hvr-icon"></i></button>
+                                <!-- Este es el botón del modal de los trofeos de la categoría Educativa -->
+                            <button class="inGameButtons hvr-icon-grow-rotate" data-toggle="modal" data-target="#trophiesModal"><i class="fa fa-trophy hvr-icon"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Este es el contenedor donde está el botón de regresar a la vista de la categoría Educativa, el cronómetro, temporizador y el botón de repetir nivel -->
+                <div class="inGameContUp mb-4 w-25 d-flex justify-content-around m-1 p-2" style="z-index: 5;">
+                    <!-- Este es el botón de regresar a la vista de la categoría Educativa  -->
+                    <button class="inGameButtons d-flex hvr-icon-back" id="exit"><i class="fa fa-arrow-left hvr-icon"></i></button>
+                    <!-- Este es el temporizador(cuenta regresiva) -->
+                    <div class="mainButton d-flex align-items-center justify-content-center pr-2 pl-2">
+                        <h4 id="cuenta" class="m-0 text-danger">0</h4>
+                    </div>
+                    <!-- Este es el cronómetro -->
+                    <div class="mainButton d-flex align-items-center justify-content-center pr-2 pl-2">
+                        <div class="cronometro">
+                            <h4 class="m-0" id="hms"></h4>
+                        </div>
+                    </div>
+                    <!-- Este es el botón de reinciar el nivel -->
+                    <button class="inGameButtons hvr-icon-spin" id="reset" onclick="this.classList = 'disabledTrophy inGameButtons'"><i class="fa fa-refresh hvr-icon"></i></button>
+                </div>
+                <!-- Esta es la fila que divide a los tableros de ajedrez y los cuadros de figuras y de estadísticas de la partida -->
+                <div class="row w-100">
+                    <!-- Esta es la sección donde están los tableros de ajedrez -->
+                    <div class="col-md-8 p-0" style="z-index: 2;">
+                        <div class="w-100 d-flex align-items-start flex-column">
+
+                            <!-- Esta es la información de las coordenadas -->
+                            <div class="mainButton p-1" style="z-index: 1; border-color: var(--blackChess) !important; color: var(--blackChess);"><i class="fa fa-arrows"></i> <span id="coordenadas">(0,0)</span></div>
+
+                            <div style="height:74vh; overflow:auto;">
+
+                            <!-- Aquí esta el tablero superior -->
+                            <div class="chessBox p-2">
+
+                                <table style="border-style:solid;" id="tabla">
+                                    <tr>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 !important;"></td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">1</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">2</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">3</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">4</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">5</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">6</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">7</td>
+                                        <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">8</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">1</td>
+                                        <td id = "elem00" onclick="SquareClicked('elem00')" style="background-color: var(--blackChess);" ></<div>
+                                        <td id = "elem01" onclick="SquareClicked('elem01')" style="background-color: white;"></td>
+                                        <td id = "elem02" onclick="SquareClicked('elem02')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem03" onclick="SquareClicked('elem03')" style="background-color: white;"></td>
+                                        <td id = "elem04" onclick="SquareClicked('elem04')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem05" onclick="SquareClicked('elem05')" style="background-color: white;"></td>
+                                        <td id = "elem06" onclick="SquareClicked('elem06')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem07" onclick="SquareClicked('elem07')" style="background-color: white;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">2</td>
+                                        <td id = "elem10" onclick="SquareClicked('elem10')" style="background-color: white;"></td>
+                                        <td id = "elem11" onclick="SquareClicked('elem11')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem12" onclick="SquareClicked('elem12')" style="background-color: white;"></td>
+                                        <td id = "elem13" onclick="SquareClicked('elem13')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem14" onclick="SquareClicked('elem14')" style="background-color: white;"></td>
+                                        <td id = "elem15" onclick="SquareClicked('elem15')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem16" onclick="SquareClicked('elem16')" style="background-color: white;"></td>
+                                        <td id = "elem17" onclick="SquareClicked('elem17')" style="background-color: var(--blackChess);" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">3</td>
+                                        <td id = "elem20" onclick="SquareClicked('elem20')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem21" onclick="SquareClicked('elem21')" style="background-color: white;"></td>
+                                        <td id = "elem22" onclick="SquareClicked('elem22')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem23" onclick="SquareClicked('elem23')" style="background-color: white;"></td>
+                                        <td id = "elem24" onclick="SquareClicked('elem24')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem25" onclick="SquareClicked('elem25')" style="background-color: white;"></td>
+                                        <td id = "elem26" onclick="SquareClicked('elem26')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem27" onclick="SquareClicked('elem27')" style="background-color: white;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">4</td>
+                                        <td id = "elem30" onclick="SquareClicked('elem30')" style="background-color: white;"></td>
+                                        <td id = "elem31" onclick="SquareClicked('elem31')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem32" onclick="SquareClicked('elem32')" style="background-color: white;"></td>
+                                        <td id = "elem33" onclick="SquareClicked('elem33')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem34" onclick="SquareClicked('elem34')" style="background-color: white;"></td>
+                                        <td id = "elem35" onclick="SquareClicked('elem35')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem36" onclick="SquareClicked('elem36')" style="background-color: white;"></td>
+                                        <td id = "elem37" onclick="SquareClicked('elem37')" style="background-color: var(--blackChess);" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">5</td>
+                                        <td id = "elem40" onclick="SquareClicked('elem40')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem41" onclick="SquareClicked('elem41')" style="background-color: white;"></td>
+                                        <td id = "elem42" onclick="SquareClicked('elem42')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem43" onclick="SquareClicked('elem43')" style="background-color: white;"></td>
+                                        <td id = "elem44" onclick="SquareClicked('elem44')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem45" onclick="SquareClicked('elem45')" style="background-color: white;"></td>
+                                        <td id = "elem46" onclick="SquareClicked('elem46')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem47" onclick="SquareClicked('elem47')" style="background-color: white;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">6</td>
+                                        <td id = "elem50" onclick="SquareClicked('elem50')"  style="background-color: white;"></td>
+                                        <td id = "elem51" onclick="SquareClicked('elem51')"  style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem52" onclick="SquareClicked('elem52')"  style="background-color: white;"></td>
+                                        <td id = "elem53" onclick="SquareClicked('elem53')"  style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem54" onclick="SquareClicked('elem54')"  style="background-color: white;"></td>
+                                        <td id = "elem55" onclick="SquareClicked('elem55')"  style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem56" onclick="SquareClicked('elem56')"  style="background-color: white;"></td>
+                                        <td id = "elem57" onclick="SquareClicked('elem57')"  style="background-color: var(--blackChess);" ></td>
+                                    </tr>
+                                    <tr> 
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">7</td>
+                                        <td id = "elem60" onclick="SquareClicked('elem60')" style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem61" onclick="SquareClicked('elem61')" style="background-color: white;"></td>
+                                        <td id = "elem62" onclick="SquareClicked('elem62')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem63" onclick="SquareClicked('elem63')" style="background-color: white;"></td>
+                                        <td id = "elem64" onclick="SquareClicked('elem64')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem65" onclick="SquareClicked('elem65')" style="background-color: white;"></td>
+                                        <td id = "elem66" onclick="SquareClicked('elem66')" style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem67" onclick="SquareClicked('elem67')" style="background-color: white;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">8</td>
+                                        <td id = "elem70" onclick="SquareClicked('elem70')"  style="background-color: white;"></td>
+                                        <td id = "elem71" onclick="SquareClicked('elem71')"  style="background-color: var(--blackChess);"></td>
+                                        <td id = "elem72" onclick="SquareClicked('elem72')"  style="background-color: white;"></td>
+                                        <td id = "elem73" onclick="SquareClicked('elem73')"  style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem74" onclick="SquareClicked('elem74')"  style="background-color: white;"></td>
+                                        <td id = "elem75" onclick="SquareClicked('elem75')"  style="background-color: var(--blackChess);" ></td>
+                                        <td id = "elem76" onclick="SquareClicked('elem76')"  style="background-color: white;"></td>
+                                        <td id = "elem77" onclick="SquareClicked('elem77')"  style="background-color: var(--blackChess);" ></td>
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                            <!-- Aquí esta el tablero inferior -->
+                            <div class="chessBox p-2">
+
+                                    <table style="border-style:solid;" id="tabla">
+                                        <tr>
+                                            <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 !important;"></td>
+                                            <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">1</td>
+                                            <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">2</td>
+                                            <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">3</td>
+                                            <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">4</td>
+                                            <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">5</td>
+                                            <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">6</td>
+                                            <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">7</td>
+                                            <td class="p-0 text-center" style="background: #ffffff !important; border-width: 0 2px 0 2px !important;">8</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">1</td>
+                                            <td id = "elem00" onclick="SquareClicked('elem00')" style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem01" onclick="SquareClicked('elem01')" style="background-color: white;"></td>
+                                            <td id = "elem02" onclick="SquareClicked('elem02')" style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem03" onclick="SquareClicked('elem03')" style="background-color: white;"></td>
+                                            <td id = "elem04" onclick="SquareClicked('elem04')" style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem05" onclick="SquareClicked('elem05')" style="background-color: white;"></td>
+                                            <td id = "elem06" onclick="SquareClicked('elem06')" style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem07" onclick="SquareClicked('elem07')" style="background-color: white;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">2</td>
+                                            <td id = "elem10" onclick="SquareClicked('elem10')" style="background-color: white;"></td>
+                                            <td id = "elem11" onclick="SquareClicked('elem11')" style="background-color: var(--blackChess);"></td>
+                                            <td id = "elem12" onclick="SquareClicked('elem12')" style="background-color: white;"></td>
+                                            <td id = "elem13" onclick="SquareClicked('elem13')" style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem14" onclick="SquareClicked('elem14')" style="background-color: white;"></td>
+                                            <td id = "elem15" onclick="SquareClicked('elem15')" style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem16" onclick="SquareClicked('elem16')" style="background-color: white;"></td>
+                                            <td id = "elem17" onclick="SquareClicked('elem17')" style="background-color: var(--blackChess);" ></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">3</td>
+                                            <td id = "elem20" onclick="SquareClicked('elem20')" style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem21" onclick="SquareClicked('elem21')" style="background-color: white;"></td>
+                                            <td id = "elem22" onclick="SquareClicked('elem22')" style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem23" onclick="SquareClicked('elem23')" style="background-color: white;"></td>
+                                            <td id = "elem24" onclick="SquareClicked('elem24')" style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem25" onclick="SquareClicked('elem25')" style="background-color: white;"></td>
+                                            <td id = "elem26" onclick="SquareClicked('elem26')" style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem27" onclick="SquareClicked('elem27')" style="background-color: white;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">4</td>
+                                            <td id = "elem30" onclick="SquareClicked('elem30')" style="background-color: white;"></td>
+                                            <td id = "elem31" onclick="SquareClicked('elem31')" style="background-color: var(--blackChess);"></td>
+                                            <td id = "elem32" onclick="SquareClicked('elem32')" style="background-color: white;"></td>
+                                            <td id = "elem33" onclick="SquareClicked('elem33')" style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem34" onclick="SquareClicked('elem34')" style="background-color: white;"></td>
+                                            <td id = "elem35" onclick="SquareClicked('elem35')" style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem36" onclick="SquareClicked('elem36')" style="background-color: white;"></td>
+                                            <td id = "elem37" onclick="SquareClicked('elem37')" style="background-color: var(--blackChess);" ></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">5</td>
+                                            <td id = "elem40" onclick="SquareClicked('elem40')" style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem41" onclick="SquareClicked('elem41')" style="background-color: white;"></td>
+                                            <td id = "elem42" onclick="SquareClicked('elem42')" style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem43" onclick="SquareClicked('elem43')" style="background-color: white;"></td>
+                                            <td id = "elem44" onclick="SquareClicked('elem44')" style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem45" onclick="SquareClicked('elem45')" style="background-color: white;"></td>
+                                            <td id = "elem46" onclick="SquareClicked('elem46')" style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem47" onclick="SquareClicked('elem47')" style="background-color: white;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">6</td>
+                                            <td id = "elem50" onclick="SquareClicked('elem50')"  style="background-color: white;"></td>
+                                            <td id = "elem51" onclick="SquareClicked('elem51')"  style="background-color: var(--blackChess);"></td>
+                                            <td id = "elem52" onclick="SquareClicked('elem52')"  style="background-color: white;"></td>
+                                            <td id = "elem53" onclick="SquareClicked('elem53')"  style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem54" onclick="SquareClicked('elem54')"  style="background-color: white;"></td>
+                                            <td id = "elem55" onclick="SquareClicked('elem55')"  style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem56" onclick="SquareClicked('elem56')"  style="background-color: white;"></td>
+                                            <td id = "elem57" onclick="SquareClicked('elem57')"  style="background-color: var(--blackChess);" ></td>
+                                        </tr>
+                                        <tr> 
+                                            <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">7</td>
+                                            <td id = "elem60" onclick="SquareClicked('elem60')" style="background-color: var(--blackChess);"></td>
+                                            <td id = "elem61" onclick="SquareClicked('elem61')" style="background-color: white;"></td>
+                                            <td id = "elem62" onclick="SquareClicked('elem62')" style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem63" onclick="SquareClicked('elem63')" style="background-color: white;"></td>
+                                            <td id = "elem64" onclick="SquareClicked('elem64')" style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem65" onclick="SquareClicked('elem65')" style="background-color: white;"></td>
+                                            <td id = "elem66" onclick="SquareClicked('elem66')" style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem67" onclick="SquareClicked('elem67')" style="background-color: white;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="pb-0 pt-0 pr-2 pl-2 text-center" style="background: #ffffff !important; border-width: 2px 0 2px 0 !important;">8</td>
+                                            <td id = "elem70" onclick="SquareClicked('elem70')"  style="background-color: white;"></td>
+                                            <td id = "elem71" onclick="SquareClicked('elem71')"  style="background-color: var(--blackChess);"></td>
+                                            <td id = "elem72" onclick="SquareClicked('elem72')"  style="background-color: white;"></td>
+                                            <td id = "elem73" onclick="SquareClicked('elem73')"  style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem74" onclick="SquareClicked('elem74')"  style="background-color: white;"></td>
+                                            <td id = "elem75" onclick="SquareClicked('elem75')"  style="background-color: var(--blackChess);" ></td>
+                                            <td id = "elem76" onclick="SquareClicked('elem76')"  style="background-color: white;"></td>
+                                            <td id = "elem77" onclick="SquareClicked('elem77')"  style="background-color: var(--blackChess);" ></td>
+                                        </tr>
+                                    </table>
+    
+                                </div>
+
+                            <h3 id="result" class="m-0 text-white text-center"></h3>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Aquí está la sección donde están los cuadros de figuras y el de las estadísticas de la partida -->
+                    <div class="col-md-4 d-flex justify-content-end mt-4 p-0" style="z-index: 5;">
+                        <div class="position-fixed w-25">
+
+                            <!-- Este es el cuadro de figuras -->
+                            <div class="p-2 mt-2 chessBox" style="width: 320px; height: 320px; border-width: 4px !important; border-radius: 25px !important;">
+                                <!-- Este es el título de Figuras -->
+                                <div class=" d-flex justify-content-start align-items-end position-absolute" style="z-index: 1;">
+                                    <div class="mainButton p-1 d-flex align-items-center justify-content-center" style="margin-top: -15px;"><h7 class="m-0">Figuras</h7></div>
+                                </div>
+                                <!-- Este es el lienzo donde se dibujan las figuras -->
+                                <div class="mainButton p-2 d-flex justify-content-center align-items-center w-100" style="height: 100%; background: #ffedce !important;">
+                                    
+                                </div>
+                            </div>
+
+                            <!-- Este es el cuadro de estadísticas de la partida -->
+                            <div class="p-2 chessBox d-flex justify-content-center" style="width: 320px; border-width: 4px !important; border-radius: 25px !important;">
+                                <div class="mainButton p-2 w-100" style="background: #ffedce !important;">
+                                    <!-- la clase scroll-none sirve para eliminar el scroll en la caja -->
+                                    <div class="scroll-none mb-2 mt-2" style="height: 120px; overflow: auto;">
+                                        <!-- Esta es la sombra en la parte inferior de la caja -->
+                                        <div class="position-fixed" style="margin-left: -10px; margin-top: 100px; width: 462px; overflow: hidden; z-index: 2;">
+                                            <div style="margin-left: -100px; height: 20px; width: 395px; box-shadow: 0 -10px 10px rgba(0, 0, 0, 0.2) inset;"></div>
+                                        </div>
+                                        <!-- Todos estos son los items de las estadísticas -->
+                                        <div class="mainButton w-100 mb-1 p-2 d-flex flex-row align-items-center justify-content-between">
+                                            <h6 class="m-0 mr-2" style="font-size: 0.8em;">Columnas</h6>
+                                            <div class="blackCircle" style="font-size: 0.8em;"><span class="mr-1 ml-1">8</span></div>
+                                        </div>
+                                        <div class="mainButton w-100 mb-1 p-2 d-flex flex-row align-items-center justify-content-between">
+                                            <h6 class="m-0 mr-2" style="font-size: 0.8em;">Filas</h6>
+                                            <div class="blackCircle" style="font-size: 0.8em;"><span class="mr-1 ml-1">8</span></div>
+                                        </div>
+                                        <div class="mainButton w-100 mb-1 p-2 d-flex flex-row align-items-center justify-content-between">
+                                            <h6 class="m-0 mr-2" style="font-size: 0.8em;">Movimientos</h6>
+                                            <div class="blackCircle" style="font-size: 0.8em;"><span class="mr-1 ml-1">0</span></div>
+                                        </div>
+                                        <div class="mainButton w-100 mb-1 p-2 d-flex flex-row align-items-center justify-content-between">
+                                            <h6 class="m-0 mr-2" style="font-size: 0.8em;">Fichas</h6>
+                                            <div class="blackCircle" style="font-size: 0.8em;"><span class="mr-1 ml-1">64</span></div>
+                                        </div>
+                                        <div class="mainButton w-100 mb-1 p-2 d-flex flex-row align-items-center justify-content-between">
+                                            <h6 class="m-0 mr-2" style="font-size: 0.8em;">Fallos</h6>
+                                            <div class="blackCircle text-danger" style="font-size: 0.8em;"><span class="mr-1 ml-1">0</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de los trofeos de la categoría Educativa -->
+     <div class="modal fade" id="trophiesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle" style="color: #68472F;"><i class="fa fa-trophy"></i> Logros</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="mainButton p-2 d-flex justify-content-start flex-column align-items-center" style="height: 100%; background: #ffedce !important;">
+                    <div class="position-fixed" style="margin-top: 260px; width: 462px; overflow: hidden; z-index: 2;">
+                        <div style="margin-left: -100px; height: 20px; width: 600px; box-shadow: 0 -10px 10px rgba(0, 0, 0, 0.2) inset;"></div>
+                    </div>
+                    <div class="w-100 scroll-none position-relative mb-3" style="height: 280px; overflow: auto; z-index: 1;">
+                        <div class="d-flex flex-row justify-content-start align-items-center mainButton p-1 m-1" style="border-radius: 100px !important;">
+                            <div class="d-flex flex-row justify-content-end align-items-start position-absolute" style="width: 95%;">
+                                <div class="mainButton text-success d-flex justify-content-center align-items-center p-1" style="margin-top: -20px;"><i class="fa fa-check"></i></div>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center w-25 mr-2">
+                                <img src="./../../../assets/trophiesIcons/star.png" class="w-50">
+                            </div>
+                            <div class="d-flex justify-content-center align-items-start flex-column pr-4">
+                                <strong class="m-0" style="font-size:1em">Estrella</strong>
+                                <p class="m-0" style="font-size:1em">Arma una Estrella en el cuadro de figuras</p>
+                            </div>
+                        </div>
+                        <div class="disabledTrophy d-flex flex-row justify-content-start align-items-center mainButton p-1 m-1" style="border-radius: 100px !important;">
+                            <div class="d-flex justify-content-center align-items-center w-25 mr-2">
+                                <img src="./../../../assets/trophiesIcons/triangle.png" class="w-50">
+                            </div>
+                            <div class="d-flex justify-content-center align-items-start flex-column pr-4">
+                                <strong class="m-0" style="font-size: 1em;">Triángulo</strong>
+                                <p class="m-0" style="font-size:1em">Arma un Triángulo en el cuadro de figuras</p>
+                            </div>
+                        </div>
+                        <div class="disabledTrophy d-flex flex-row justify-content-start align-items-center mainButton p-1 m-1" style="border-radius: 100px !important;">
+                            <div class="d-flex justify-content-center align-items-center w-25 mr-2">
+                                <img src="./../../../assets/trophiesIcons/square.png" class="w-50">
+                            </div>
+                            <div class="d-flex justify-content-center align-items-start flex-column pr-4">
+                                <strong class="m-0" style="font-size: 1em;">Cuadrado</strong>
+                                <p class="m-0" style="font-size:1em">Arma un Cuadrado en el cuadro de figuras</p>
+                            </div>
+                        </div>
+                        <div class="disabledTrophy d-flex flex-row justify-content-start align-items-center mainButton p-1 m-1" style="border-radius: 100px !important;">
+                            <div class="d-flex justify-content-center align-items-center w-25 mr-2">
+                                <img src="./../../../assets/trophiesIcons/pyramid.png" class="w-50">
+                            </div>
+                            <div class="d-flex justify-content-center align-items-start flex-column">
+                                <strong class="m-0" style="font-size: 1em;">Pirámide</strong>
+                                <p class="m-0" style="font-size:1em">Arma una Pirámide en el cuadro de figuras</p>
+                            </div>
+                        </div>
+                        <div class="disabledTrophy d-flex flex-row justify-content-start align-items-center mainButton p-1 m-1" style="border-radius: 100px !important;">
+                            <div class="d-flex justify-content-center align-items-center w-25 mr-2">
+                                <img src="./../../../assets/trophiesIcons/cube.png" class="w-50">
+                            </div>
+                            <div class="d-flex justify-content-center align-items-start flex-column">
+                                <strong class="m-0" style="font-size: 1em;">Cubo</strong>
+                                <p class="m-0" style="font-size:1em">Arma un Cubo en el cuadro de figuras</p>
+                            </div>
+                        </div>
+
+                    </div>                                        
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal de las instrucciones del nivel -->
+    <div class="modal fade" id="objectiveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle" style="color: #68472F;"><i class="fa fa-file-text"></i> Instrucciones</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="mainButton p-2 d-flex justify-content-center flex-column align-items-center" style="height: 100%; background: #ffedce !important;">
+                    <img src="./../../../assets/angles/vectors.png" class="w-100" style="border-radius: 25px !important; background: white !important; box-shadow: 0 0 10px 1px rgba(0,0,0,0.2);">
+                    <h5 class="m-0 text-center w-100 pl-4 pr-4 mt-2" style="height: 40vh; overflow: auto;">
+                        -Traza una serie de vectores mediante saltos del caballo que se modelan en el tablero de gráficas. Con 9 saltos en serie del caballo, luego ubica las coordenadas del vector resultante.<br>
+                        (Aviso) -ubica el vector resultante de tu recorrido.<br>
+                        El jugador puede elegir la forma como ubica las coordenadas.<br>
+                        -Por medio de entrada con teclado las coordenadas serían: inicio (3,5), llegada (8,3).<br>
+                        -Gráficamente basta con indicar con el puntero del mouse los puntos inicial y final del vector resultante.
+                    </h5>                                         
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+<script src="../../templates/Trophies-Online-Offline-Templates/allTemplate.js"></script>
+<script src="./../../controllers/Online/OnlineEducativeGameController.js"></script>
+</body>
+</html>

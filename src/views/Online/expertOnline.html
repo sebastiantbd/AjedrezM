@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="./../../templates/Trophies-Online-Offline-Templates/allTemplate.css">
+<link rel="stylesheet" href="./../../templates/styles.css">
+<title>Multijugador</title>
+</head>
+<body>
+
+    <div class="w-100" id="colorBack1" style="background: #192A56; height: 100%;  box-shadow: 0 0 100px 0px rgba(0,0,0,0.2) inset !important;">
+        <!-- Esta es la textura de fondo -->
+        <div class="textureBig w-100"></div>
+        <!-- Este es el contenedor principal -->
+        <div class="container p-4 d-flex">
+            <div class="w-100 d-flex justify-content-center flex-column align-items-center" style="z-index: 1;">
+                <div class="w-100 d-flex justify-content-start">
+                    <div class="position-absolute d-flex flex-row align-items-center">
+                        <!-- Aquí está el ícono de la flecha en la parte superior izquierda que sirve para regresar a la vista de las categorías, y la de una casa para regresar a la vista del main -->
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mainButton m-0" id="barra" style="border-radius:100px !important; border-width: 3px !important;">
+                                <li class="breadcrumb-item"><a href="./onlineCategories.html" class="hvr-icon-grow-rotate" style="border-width: 4px !important; border-radius: 100px !important;"><i class="fa fa-arrow-left hvr-icon" style="font-size: 1.5em;"></i></a></li>
+                                <li class="breadcrumb-item"><a href="./../main.html" class="hvr-icon-grow-rotate" style="border-width: 4px !important; border-radius: 100px !important;"><i class="fa fa-home hvr-icon" style="font-size: 1.5em;"></i> Menú</a></li>
+                            </ol>
+                        </nav>
+                        <!-- Aquí está el nombre, la imagen y el nivel Online del usuario -->
+                        <div class="mainButton p-2 pr-3 pl-3 ml-2 d-flex justify-content-start align-items-center" style="border-width: 4px !important; border-radius: 100px !important;">
+                            <div class="d-flex justify-content-end align-items-start position-absolute" style="width: 42%;" id="OnlineLevel2">
+                            
+                            </div>
+                            <div class="d-flex justify-content-center" style="width: 30px; height: 30px; border-radius: 100%; overflow: hidden;">
+                                <img src="./../../../assets/user.gif" height="100%">
+                            </div>
+                            <h6 class="m-0 ml-2 nameUser"></h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Este es el texto de la posición global Online que tiene el usuario -->
+                <div class="w-100 d-flex justify-content-end">
+                    <div class="position-absolute mainButton mt-3 m-2 p-2 pr-3 pl-3" style="border-width: 4px !important; border-radius: 100px !important;"><h5 class="m-0">Tu posición global es <strong>1327</strong></h5></div>
+                </div>
+                <!-- Este es el título de Experta -->
+                <div class="mainButton animated pulse infinite ad-3 m-2 p-2 pr-4 pl-4" style="border-width: 4px !important; border-radius: 100px !important;"><h3 class="m-0"><i class="fa fa-flash"></i> Experta</h3></div>
+                <div class="w-50 mt-5">
+                    <div>
+                        <div class="row mainButton p-3 d-flex justify-content-center align-items-center" style="border-radius:50px !important; border-width:5px !important;">
+
+                            <div class="w-100 d-flex justify-content-end">
+                                <!-- Este es el botón para abrir un Modal con las instrucciones de esta categoría -->
+                                <button class="levelsBack inGameButtons hvr-icon-grow-rotate mr-2" data-toggle="modal" data-target="#objectiveModal" style="color: #68472F !important;"><i class="fa fa-file-text hvr-icon"></i></button>
+                                <!-- Este es el botón para abrir un Modal con los trofeos conseguidos en esta categoría -->
+                                <button class="levelsBack inGameButtons hvr-icon-grow-rotate" data-toggle="modal" data-target="#trophiesModal" style="color: #68472F !important;"><i class="fa fa-trophy hvr-icon"></i></button>
+                            </div>
+                            
+                            <!-- Este es un texto que dice los puntos máximos conseguidos -->
+                            <div class="w-75 levelsBack mainButton p-2 m-2 d-flex justify-content-center align-items-center" style="border-radius:100px !important; border-width:5px !important">
+                                <h4 class="m-0 mr-2"><i class="fa fa-angle-double-up"></i> Puntos Máximos: <strong style="color: #68472F;">12327</strong></h4>
+                            </div> 
+
+                            <!-- Este es un texto que dice las figuras formadas -->
+                            <div class="w-75 levelsBack mainButton p-2 m-2 d-flex justify-content-center align-items-center" style="border-radius:100px !important; border-width:5px !important">
+                                <h4 class="m-0 mr-2"><i class="fa fa-star"></i> Figuras formadas: <strong style="color: #68472F;">12</strong></h4>
+                            </div> 
+
+                            <!-- Este es un texto que dice el mejor tiempo conseguido al formar la mayor cantidad de figuras -->
+                            <div class="w-75 levelsBack mainButton p-2 m-2 d-flex justify-content-center align-items-center" style="border-radius:100px !important; border-width:5px !important">
+                                <h4 class="m-0 mr-2 text-success"><i class="fa fa-clock-o"></i> Mejor Tiempo: <strong style="color: #68472F;">03:56</strong></h4>
+                            </div> 
+
+                            <!-- Este es un texto que dice las victorias conseguidas -->
+                            <div class="w-75 levelsBack mainButton p-2 m-2 d-flex justify-content-center align-items-center" style="border-radius:100px !important; border-width:5px !important">
+                                <h4 class="m-0 mr-2 text-success"><i class="fa fa-thumbs-o-up"></i> Victorias: <strong style="color: #68472F;">12</strong></h4>
+                            </div> 
+
+                            <!-- Este es un texto que dice las derrotas conseguidas -->
+                            <div class="w-75 levelsBack mainButton p-2 m-2 d-flex justify-content-center align-items-center" style="border-radius:100px !important; border-width:5px !important">
+                                <h4 class="m-0 mr-2 text-danger"><i class="fa fa-thumbs-o-down"></i> Derrotas: <strong style="color: #68472F;">9</strong></h4>
+                            </div> 
+
+                            <!-- Este es el botón de play para jugar que abre un mensaje de buscando jugador... -->
+                            <div class="w-100 d-flex justify-content-center align-items-center mt-2 mb-2">
+                                <button id="level1" class="levelsBack mainButton p-2 d-flex justify-content-center align-items-center w-50 hvr-float hvr-icon-rotate" style="border-radius:100px !important; border-width:5px !important"><i class="fa fa-play hvr-icon" style="font-size: 1.5em;"></i></button>
+                            </div>  
+                                
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de los trofeos de esta categoría -->
+    <div class="modal fade" id="trophiesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle" style="color: #68472F;"><i class="fa fa-trophy"></i> Logros</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="mainButton p-2 d-flex justify-content-start flex-column align-items-center" style="height: 100%; background: #ffedce !important;">
+                    <div class="position-fixed" style="margin-top: 260px; width: 462px; overflow: hidden; z-index: 2;">
+                        <div style="margin-left: -100px; height: 20px; width: 600px; box-shadow: 0 -10px 10px rgba(0, 0, 0, 0.2) inset;"></div>
+                    </div>
+                    <div class="w-100 scroll-none position-relative mb-3" style="height: 280px; overflow: auto; z-index: 1;">
+                        <div class="d-flex flex-row justify-content-start align-items-center mainButton p-1 m-1" style="border-radius: 100px !important;">
+                            <div class="d-flex flex-row justify-content-end align-items-start position-absolute" style="width: 95%;">
+                                <div class="mainButton text-success d-flex justify-content-center align-items-center p-1" style="margin-top: -20px;"><i class="fa fa-check"></i></div>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center w-25 mr-2">
+                                <img src="./../../../assets/trophiesIcons/star.png" class="w-50">
+                            </div>
+                            <div class="d-flex justify-content-center align-items-start flex-column pr-4">
+                                <strong class="m-0" style="font-size:1em">Estrella</strong>
+                                <p class="m-0" style="font-size:1em">Arma una Estrella en el cuadro de figuras</p>
+                            </div>
+                        </div>
+                        <div class="disabledTrophy d-flex flex-row justify-content-start align-items-center mainButton p-1 m-1" style="border-radius: 100px !important;">
+                            <div class="d-flex justify-content-center align-items-center w-25 mr-2">
+                                <img src="./../../../assets/trophiesIcons/triangle.png" class="w-50">
+                            </div>
+                            <div class="d-flex justify-content-center align-items-start flex-column pr-4">
+                                <strong class="m-0" style="font-size: 1em;">Triángulo</strong>
+                                <p class="m-0" style="font-size:1em">Arma un Triángulo en el cuadro de figuras</p>
+                            </div>
+                        </div>
+                        <div class="disabledTrophy d-flex flex-row justify-content-start align-items-center mainButton p-1 m-1" style="border-radius: 100px !important;">
+                            <div class="d-flex justify-content-center align-items-center w-25 mr-2">
+                                <img src="./../../../assets/trophiesIcons/square.png" class="w-50">
+                            </div>
+                            <div class="d-flex justify-content-center align-items-start flex-column pr-4">
+                                <strong class="m-0" style="font-size: 1em;">Cuadrado</strong>
+                                <p class="m-0" style="font-size:1em">Arma un Cuadrado en el cuadro de figuras</p>
+                            </div>
+                        </div>
+                        <div class="disabledTrophy d-flex flex-row justify-content-start align-items-center mainButton p-1 m-1" style="border-radius: 100px !important;">
+                            <div class="d-flex justify-content-center align-items-center w-25 mr-2">
+                                <img src="./../../../assets/trophiesIcons/pyramid.png" class="w-50">
+                            </div>
+                            <div class="d-flex justify-content-center align-items-start flex-column">
+                                <strong class="m-0" style="font-size: 1em;">Pirámide</strong>
+                                <p class="m-0" style="font-size:1em">Arma una Pirámide en el cuadro de figuras</p>
+                            </div>
+                        </div>
+                        <div class="disabledTrophy d-flex flex-row justify-content-start align-items-center mainButton p-1 m-1" style="border-radius: 100px !important;">
+                            <div class="d-flex justify-content-center align-items-center w-25 mr-2">
+                                <img src="./../../../assets/trophiesIcons/cube.png" class="w-50">
+                            </div>
+                            <div class="d-flex justify-content-center align-items-start flex-column">
+                                <strong class="m-0" style="font-size: 1em;">Cubo</strong>
+                                <p class="m-0" style="font-size:1em">Arma un Cubo en el cuadro de figuras</p>
+                            </div>
+                        </div>
+
+                    </div>                                        
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal de las instrucciones de esta categoría -->
+    <div class="modal fade" id="objectiveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle" style="color: #68472F;"><i class="fa fa-file-text"></i> Instrucciones</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="mainButton p-2 d-flex justify-content-center flex-column align-items-center" style="height: 100%; background: #ffedce !important;">
+                    <div class="w-100 d-flex justify-content-center align-items-center" style="height: 250px; overflow: hidden; border-radius: 25px !important; box-shadow: 0 0 10px 1px rgba(0,0,0,0.2);">
+                        <img src="./../../../assets/purpleGeo.jpg" class="w-100">
+                    </div>
+                    <h5 class="m-0 text-center w-75 mt-2"> Derrota a tu contrincante armando las figuras <i class="fa fa-image"></i> que se muestren en pantalla antes del tiempo límite<br>
+                    <strong>¡Buena Suerte!</strong></h5>                                         
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+<script src="../../templates/Trophies-Online-Offline-Templates/allTemplate.js"></script>
+<script src="./../../controllers/Online/expertOnlineController.js"></script>
+</body>
+</html>
