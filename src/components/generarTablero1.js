@@ -320,4 +320,18 @@ function SearchOption(x, y) {
         document.getElementById(elem).style.backgroundColor = "var(--pink)";
         validOption.push(elem);    
     }
+
+    function resetearColorFondoRosa() {
+        // Recorrer todas las celdas resaltadas
+        for (var i = 0; i < validOption.length; i++) {
+            var elem = validOption[i];
+            // Restablecer el color de fondo a su estado original
+            document.getElementById(elem).style.backgroundColor = "";
+        }
+        // Limpiar el array de opciones válidas
+        validOption = [];
+    }
+    
+
+
 }

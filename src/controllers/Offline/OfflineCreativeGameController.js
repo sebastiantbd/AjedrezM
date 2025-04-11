@@ -337,3 +337,24 @@ function gameRestart() {
 		}
 	}
 }
+
+function resetBoardColors() {
+    // Recorrer todas las filas y columnas del tablero
+    for (var row = 0; row < 8; row++) {
+        for (var col = 0; col < 8; col++) {
+            var elem = "elem" + row + col;
+            var cell = document.getElementById(elem);
+            // Asignar el color de fondo adecuado según la posición de la celda
+            if ((row + col) % 2 === 0) {
+                // Si la suma de la fila y la columna es par, es una celda blanca
+                cell.style.backgroundColor = "white";
+            } else {
+                // Si la suma de la fila y la columna es impar, es una celda negra
+                cell.style.backgroundColor = "var(--blackChess)";
+            }
+        }
+    }
+}
+
+
+
