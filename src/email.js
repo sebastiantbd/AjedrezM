@@ -7,25 +7,25 @@ function prueba(info){
   let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'jesusstivenortiz@gmail.com',
-      pass: '1007286993'
+      user: 'sebastiantbd07@gmail.com',
+      pass: 'cxyzdjzvhzmeyfdi'
     }
   });
 
   let mailOptions = {
-  from: 'jesusstivenortiz@gmail.com',
-  to: info.email,
-  subject: 'Sending Email using Node.js',
-  html: ` <h2>Este es tu cdigo de recuperacion: ${info.code}</h2>`
+    from: 'sebastiantbd07@gmail.com',
+    to: info.email,
+    subject: 'Sending Email using Node.js',
+    html: `<h2>Este es tu código de recuperación: ${info.code}</h2>`
   };
 
   transporter.sendMail(mailOptions, function(error, info){
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('enviado');
-        window.location.href = './view/codePassword.html';
-      }
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('enviado');
+      window.location.href = './view/codePassword.html';
+    }
   });
 }
 

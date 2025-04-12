@@ -9,7 +9,57 @@ mailForm.addEventListener('submit', (e) => {
     // aquí creamos una variable con un objeto que tiene el nombre de la tabla(base de datos), y el valor del input del email
     let datos = {tabla: "tbl_usuarios", email: mailInput.value};
     // Aquí enviamos la variable con el ipcRenderer para recibirlo en el index.js
-    ipcRenderer.send('mailPassword', datos);
+    //Edicion 2025
+    ipcRenderer.send('mailPassword', datos).then(respuesta => {
+        if (respuesta === 'emailNoExiste') {
+            typeV = 'error';
+    
+            type(typeV);
+    
+            new Noty({
+                text: `El email no existe, inténtelo nuevamente o regístrese!`,
+                theme: 'sunset',
+                type: typeV,
+                timeout: 3000,
+                progressBar: true,
+                animation: burbujas
+            }).show();
+        } else if (respuesta === 'emailCorrecto') {
+            typeV = 'success';
+    
+            type(typeV);
+    
+            new Noty({
+                text: `Se ha enviado un código a su correo electrónico.`,
+                theme: 'sunset',
+                type: typeV,
+                timeout: 2500,
+                progressBar: true,
+                animation: burbujas
+            }).show();
+    
+            setTimeout(() => {
+                window.location.href = './codePassword.html';
+            }, 2500);
+        } else if (respuesta === 'ErrorEnvio') {
+            typeV = 'error';
+    
+            type(typeV);
+    
+            new Noty({
+                text: `El mensaje no se pudo enviar. Revise su conexión a internet o inténtelo nuevamente.`,
+                theme: 'sunset',
+                type: typeV,
+                timeout: 4000,
+                progressBar: true,
+                animation: burbujas
+            }).show();
+        }
+    });
+    
+    
+
+    //ipcRenderer.send('mailPassword', datos);
 });
 
 // Aquí recibimos a emailNoExiste que se activa cuando el email copiado no existe

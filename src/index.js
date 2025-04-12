@@ -169,6 +169,35 @@ ipcMain.on('registerPersonas', (e, datos) => {
 });
 
 // recuperacion de contraseña
+/*
+ipcMain.on('mailPassword', async (e, datos) => {
+    try {
+        const rows = await knex(datos.tabla).select('*').where({ email: datos.email });
+
+        if (rows.length === 0) {
+            e.reply('emailNoExiste');
+        } else {
+            let code = Math.floor(999999 * Math.random()) + 100000;
+            let email = datos.email;
+            let info = { email, code };
+
+            try {
+                await mai.prueba(info); // Asegúrate que esta función devuelva una promesa
+                e.reply('emailCorrecto');
+            } catch (error) {
+                console.log('Error enviando el correo:', error);
+                e.reply('ErrorEnvio');
+            }
+        }
+    } catch (error) {
+        console.log('Error en mailPassword:', error);
+        e.reply('ErrorEnvio');
+    }
+});
+*/
+
+
+
 ipcMain.on('mailPassword', (e, datos)=> {
     knex(datos.tabla)
     .select('*').where({email:datos.email})
@@ -190,6 +219,7 @@ ipcMain.on('mailPassword', (e, datos)=> {
         
     })
 });
+
 
 // PARTE INTERNA DE LA APLICACION, A LA CUAL SE DEBE APLICAR JWT PARA LA AUTENTIFICACION
 ipcMain.on('useSessionStorage',(e, data)=>{
