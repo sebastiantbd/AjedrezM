@@ -80,34 +80,35 @@ ipcRenderer.on('emailNoExiste', () => {
 })
 
 // para el envío de datos al correo electrónico se necesita una buena conexión a internet, por ello todo esto está comentado
-// ipcRenderer.on('emailCorrecto', () => {
-//     typeV = 'success';
+// Esto estaba comentado
+ipcRenderer.on('emailCorrecto', () => {
+     typeV = 'success';
 
-//     type(typeV);
+     type(typeV);
 
-//     new Noty({
-//         text: `Se ha enviado un codigo a su correo electronico.`,
-//         theme: 'sunset',
-//         type: typeV,
-//         timeout: 3000,
-//         progressBar: true,
-//         animation: burbujas
-//     }).show();
+     new Noty({
+         text: `Se ha enviado un codigo a su correo electronico.`,
+         theme: 'sunset',
+         type: typeV,
+         timeout: 3000,
+         progressBar: true,
+         animation: burbujas
+     }).show();
 
-//     window.location.href = './codePassword.html';
-// })
+     window.location.href = './codePassword.html';
+ })
 
-// ipcRenderer.on('ErrorEnvio', () => {
-//     typeV = 'error';
+ ipcRenderer.on('ErrorEnvio', () => {
+     typeV = 'error';
 
-//     type(typeV);
+     type(typeV);
 
-//     new Noty({
-//         text: `El mensaje no se pudo enviar, revice su conexion a internet o intentelo nuevamente.`,
-//         theme: 'sunset',
-//         type: typeV,
-//         timeout: 4000,
-//         progressBar: true,
-//         animation: burbujas
-//     }).show();
-// })
+     new Noty({
+         text: `El mensaje no se pudo enviar, revice su conexion a internet o intentelo nuevamente.`,
+         theme: 'sunset',
+         type: typeV,
+         timeout: 4000,
+         progressBar: true,
+         animation: burbujas
+     }).show();
+ })

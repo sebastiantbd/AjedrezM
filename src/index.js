@@ -169,7 +169,7 @@ ipcMain.on('registerPersonas', (e, datos) => {
 });
 
 // recuperacion de contraseña
-/*
+
 ipcMain.on('mailPassword', async (e, datos) => {
     try {
         const rows = await knex(datos.tabla).select('*').where({ email: datos.email });
@@ -194,7 +194,7 @@ ipcMain.on('mailPassword', async (e, datos) => {
         e.reply('ErrorEnvio');
     }
 });
-*/
+
 
 
 
